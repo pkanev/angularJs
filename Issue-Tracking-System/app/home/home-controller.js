@@ -10,7 +10,6 @@
 		.controller('HomeCtrl', [
 			'$scope',
 			function($scope) {
-				$scope.name = 'pesho';
 			}
 		])
 	
