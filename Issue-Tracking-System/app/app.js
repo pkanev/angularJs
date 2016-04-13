@@ -6,6 +6,8 @@
 	  'ngRoute',
 	  'angular-loading-bar',
 	  'issueTrackingSystem.home',
+	  'issueTrackingSystem.users.identity',
+	  'issueTrackingSystem.common'
 	])
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.otherwise({redirectTo: '/'});

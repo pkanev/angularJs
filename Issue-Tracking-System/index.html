@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="app/styles/app.css">
   <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body ng-controller="MainCtrl">
 <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -27,10 +27,10 @@
         <div ng-if="isAuthenticated" class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
-              <a href="#/newsFeed">View Issues</a>
+              <a href="#/projects">Projects</a>
             </li>
-            <li>
-              <a href="#/friendRequests">Post issue</a>              
+            <li ng-if="isAdmin">
+              <a href="#/friendRequests">Create a project!</a>              
             </li>
             <li>
               <a href="#/settings">Settings</a>              
@@ -58,5 +58,7 @@
   <script src="app/app.js"></script>
   <script src="app/home/home-controller.js"></script>
   <script src="app/users/authentication.js"></script>
+  <script src="app/users/identity.js"></script>
+  <script src="app/common/main-controller.js"></script>
 </body>
 </html>

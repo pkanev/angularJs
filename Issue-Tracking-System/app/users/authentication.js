@@ -21,7 +21,8 @@
 
 					$http(req)
 						.then(function(response) {
-							deferred.resolve(response.data);
+							//should automatically login user
+							deferred.resolve(loginUser(user));
 						}, function(error) {
 
 						});
