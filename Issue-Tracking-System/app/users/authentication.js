@@ -6,8 +6,9 @@
 			'$http',
 			'$q',
 			'$httpParamSerializerJQLike',
+			'identity',
 			'BASE_URL',
-			function($http, $q, $httpParamSerializerJQLike, BASE_URL) {
+			function($http, $q, $httpParamSerializerJQLike, identity, BASE_URL) {
 				function registerUser(user) {
 					var deferred = $q.defer(),
 						req = {
@@ -22,7 +23,7 @@
 					$http(req)
 						.then(function(response) {
 							//should automatically login user
-							deferred.resolve(loginUser(user));
+							deferred.resolve(identity.getToken(user));
 						}, function(error) {
 
 						});
@@ -30,22 +31,11 @@
 				}
 
 				function loginUser(user) {
-					var deferred = $q.defer(),
-						req;
+					var deferred = $q.defer();
 
-					user.grant_type='password';
-					req = {
-						method: 'POST',
-					    url: BASE_URL + 'api/Token',
-					    data: $httpParamSerializerJQLike(user),
-					    headers: {
-					    	'Content-Type': 'application/x-www-form-urlencoded'
-					    }
-					};
-
-					$http(req)//.post(BASE_URL + 'api/Token', $httpParamSerializerJQLike(user))
+					identity.getToken(user)
 						.then(function(response) {
-							deferred.resolve(response.data);
+							deferred.resolve(response);
 						}, function(error) {
 
 						});
