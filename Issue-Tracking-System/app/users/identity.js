@@ -8,9 +8,10 @@
 			function($http, $q, $httpParamSerializerJQLike, BASE_URL) {
 				var deferred = $q.defer(),
 					currentUser = undefined,
-					accessToken = '2_8AEZ9E_K13k1m3yHqt71qmAoL1Uef0_oL8IMcG_v4GzN-9mxmrGJ9dXG8EUf3DVT7nXFtDTJTmWk7Adqe3HmhhC6wzIIM6hFI4vRBapQy-DBUxKffaxFStKgXo8MKQP_j0oN51kwpSYLeC_ee4I4ifLKcpT_ymftO9ZwvWvsgKhhGJXlk5LjLtCCbrn_y5zDYNY23VeKGc2XUnX9s3N0yWPwWQvfAvh1Ih31X_QbH0eiGy67slMWMp8qV6Vv-__PwAYVO-5e3yF5oK6yrsiEmLqhf1pG2XAwZZ580jiD7xNv_xqs-wsfzPoSI9aHm4P_0cpBYXeQmjg4UEKU2UsQk04LtusdJqJR2K91dsCD_qEditpyQ79Xk1iwOsdwTd9yeDlwjabqrj0PDbNWGKfy6_C6-5TLtpj1GGm-wB8ZEJSwo84jFdb7iWOR20PnhrYEePeAtHFMgMm93AoTwyur0HWKWEJ8MDqkOSS0Q0EwA';
+					accessToken,
+					tokenType;
 
-				$http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+				$http.defaults.headers.common.Authorization = tokenType + ' ' + accessToken;
 
 				$http.get(BASE_URL + 'users/me')
 					.then(function(response) {
@@ -36,7 +37,12 @@
 
 						$http(req)
 							.then(function(response) {
+								accessToken = response.data.access_token;
+								tokenType = response.data.token_type;
+								sessionStorage['currentUser'] = JSON.stringify(response.data);
 								deferred.resolve(response.data);
+								console.log(accessToken);
+								console.log(tokenType);
 							}, function(error) {
 
 							});
@@ -50,7 +56,7 @@
 						}
 					},
 					isAuthenticated: function() {
-						return true;
+						return sessionStorage['currentUser'] != undefined;
 					},
 					isAdmin: function() {
 						return true;
