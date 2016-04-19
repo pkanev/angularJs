@@ -14,51 +14,54 @@
   <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="MainCtrl">
-<div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="#/" class="navbar-brand">Issue Tracking System</a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div ng-if="isAuthenticated" class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="#/projects">Projects</a>
-            </li>
-            <li ng-if="isAdmin">
-              <a href="#/friendRequests">Create a project!</a>              
-            </li>
-            <li>
-              <a href="#/settings">Settings</a>              
-            </li>
-            <li>
-              <a href="#/changePassword">Change Password</a>              
-            </li>
-            <li>
-              <a href="#/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="#/" class="navbar-brand">Issue Tracking System</a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div ng-if="isAuthenticated" class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#/projects">Projects</a>
+          </li>
+          <li ng-if="isAdmin">
+            <a href="#/friendRequests">Create a project!</a>              
+          </li>
+          <li>
+            <a href="#/settings">Settings</a>              
+          </li>
+          <li>
+            <a href="#/changePassword">Change Password</a>              
+          </li>
+          <li>
+            <a href="#/logout">Logout</a>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
     
-    <div class="container">
-        <div ng-view></div>
-    </div>
+  <div class="container">
+      <div ng-view></div>
+  </div>
 
   <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="app/bower_components/angular/angular.js"></script>
   <script src="app/bower_components/angular-route/angular-route.js"></script>
+  <script src="app/bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src='app/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
   <script src="app/app.js"></script>
   <script src="app/home/home-controller.js"></script>
   <script src="app/users/authentication.js"></script>
   <script src="app/users/identity.js"></script>
   <script src="app/common/main-controller.js"></script>
+  <script src="app/projects/projects-controller.js"></script>
+  <script src="app/projects/projects-service.js"></script>
 </body>
 </html>
