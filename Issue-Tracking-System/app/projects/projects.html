@@ -1,7 +1,13 @@
+<pagination total-items="projects.length" ng-model="projectsParams.startPage"
+items-per-page="projectsParams.pageSize" ng-change="reloadProjects()"
+max-size="9" boundary-links="true"></pagination>
 <div>
 	<ul>
 		<li ng-repeat="project in projects">
-			<div>{{project.Name}} - {{project.Id}}</div>
+			<span>{{project.Name}} <a href="#/projects/{{project.Id}}" class="btn btn-info">View</a></span>
 		</li>
 	</ul>
+</div>
+<div ng-if="projects.length==0" class="box no-data">
+No projects found.
 </div>

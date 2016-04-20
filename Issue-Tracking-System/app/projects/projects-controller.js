@@ -10,11 +10,21 @@
 		.controller('ProjectsCtrl', [
 			'$scope',
 			'projectCollection',
-			function($scope, projectCollection) {
-				projectCollection.getAllProjects()
-					.then(function(projects) {
-						$scope.projects = projects;
-					})
+			'PAGE_SIZE',
+			function($scope, projectCollection, PAGE_SIZE) {
+				$scope.projectsParams = {
+		        	'startPage' : 1,
+					'pageSize' : PAGE_SIZE
+		        };
+
+		        $scope.reloadProjects = function() {
+		            projectCollection.getAllProjects($scope.projectsParams)
+		            	.then(function (projects) {
+		            		$scope.projects = projects;
+		            	})
+		        };
+
+		        $scope.reloadProjects();
 			}
 		])
 })();

@@ -6,6 +6,7 @@
 	  'ngRoute',
 	  'ngCookies',
 	  'angular-loading-bar',
+	  'ui.bootstrap.pagination',
 	  'issueTrackingSystem.home',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
@@ -14,5 +15,6 @@
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.otherwise({redirectTo: '/'});
 	}])
-	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+	.constant('PAGE_SIZE', 10);
 })(); 

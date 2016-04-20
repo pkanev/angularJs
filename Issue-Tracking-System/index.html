@@ -26,9 +26,6 @@
       </div>
       <div ng-if="isAuthenticated" class="navbar-collapse collapse" id="navbar-main">
         <ul class="nav navbar-nav">
-          <li>
-            <a href="#/projects">Projects</a>
-          </li>
           <li ng-if="isAdmin">
             <a href="#/friendRequests">Create a project!</a>              
           </li>
@@ -45,9 +42,11 @@
       </div>
     </div>
   </div>
-    
+
   <div class="container">
-      <div ng-view></div>
+    <a href="#/dashboard" class="btn btn-success">Dashboard</a>
+    <a href="#/projects" class="btn btn-success">Projects</a>
+    <div ng-view></div>
   </div>
 
   <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
@@ -56,6 +55,7 @@
   <script src="app/bower_components/angular-route/angular-route.js"></script>
   <script src="app/bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src='app/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+  <script src='app/bower_components/angular-bootstrap/ui-bootstrap.min.js'></script>
   <script src="app/app.js"></script>
   <script src="app/home/home-controller.js"></script>
   <script src="app/users/authentication.js"></script>
