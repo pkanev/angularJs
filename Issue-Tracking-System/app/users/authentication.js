@@ -6,9 +6,10 @@
 			'$http',
 			'$q',
 			'$httpParamSerializerJQLike',
+			'$location',
 			'identity',
 			'BASE_URL',
-			function($http, $q, $httpParamSerializerJQLike, identity, BASE_URL) {
+			function($http, $q, $httpParamSerializerJQLike, $location, identity, BASE_URL) {
 				function registerUser(user) {
 					var deferred = $q.defer(),
 						req = {
@@ -43,7 +44,10 @@
 				}
 
 				function logout() {
-
+					identity.removeToken();
+					identity.clearHeaders();
+					identity.removeUserProfile();
+					$location.path('/');
 				}
 
 

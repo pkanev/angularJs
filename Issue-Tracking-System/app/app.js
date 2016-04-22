@@ -15,6 +15,9 @@
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.otherwise({redirectTo: '/'});
 	}])
+	.run(['identity', function(identity) {
+		identity.refreshCookie();
+	}])
 	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 	.constant('PAGE_SIZE', 10);
 })(); 

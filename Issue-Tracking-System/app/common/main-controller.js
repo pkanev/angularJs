@@ -9,9 +9,14 @@
 				identity.getCurrentUser()
 					.then(function(user) {
 						$scope.currentUser = user;
-					});
+						$scope.isAuthenticated = true;
+					})
 
-				$scope.isAuthenticated = identity.isAuthenticated();
 				$scope.isAdmin = identity.isAdmin();
+
+				// if($scope.isAuthenticated) {
+				// 	identity.requestUserProfile();
+				// }
+
 			}]);	
 })();

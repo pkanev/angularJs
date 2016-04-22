@@ -15,7 +15,6 @@
 				$scope.login = function(user) {
 					authentication.loginUser(user)
 						.then(function(loggedInUser) {
-							console.log(loggedInUser);
 							$location.path('/projects');
 						})
 				};
@@ -23,7 +22,7 @@
 				$scope.register = function(user) {
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
-						console.log(registeredUser);
+						$location.path('/projects');
 					}), function(err) {
 						console.log(err);
 					};
