@@ -4,19 +4,20 @@
 			'$http',
 			'$q',
 			'$httpParamSerializerJQLike',
-			'$cookies',
+			'ipCookie',
 			'BASE_URL',
-			function($http, $q, $httpParamSerializerJQLike, $cookies, BASE_URL) {
+			function($http, $q, $httpParamSerializerJQLike, ipCookie, BASE_URL) {
 				var deferred = $q.defer(),
 					currentUser = undefined,
 					AUTHENTICATION_COOKIE_KEY = '!__Authentication_Cookie_Key__!';
 
 				function preserveUserData(data) {
-					console.log(data);
 					var accessToken = data.access_token;
 					var tokenType = data.token_type;
+					var daysToExpire = Math.ceil(parseFloat(data.expires_in)/60/60/24);
 					$http.defaults.headers.common.Authorization = tokenType + ' ' + accessToken;
-					$cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken, [{expires: data['.expires'], path:'/projects'}]);
+					ipCookie(AUTHENTICATION_COOKIE_KEY, accessToken, {
+						expires: daysToExpire});
 				}
 
 				function getCurrentUser() {
@@ -56,7 +57,7 @@
 				}
 
 				function removeToken () {
-					$cookies.remove(AUTHENTICATION_COOKIE_KEY);
+					ipCookie.remove(AUTHENTICATION_COOKIE_KEY);
 				}
 
 				function clearHeaders() {
@@ -65,7 +66,7 @@
 
 				function refreshCookie() {
 					if (isAuthenticated()) {
-						$http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
+						$http.defaults.headers.common.Authorization = 'Bearer ' + ipCookie(AUTHENTICATION_COOKIE_KEY);
 						requestUserProfile();
 					}
 				}
@@ -88,7 +89,7 @@
 				}
 
 				function isAuthenticated() {
-					return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
+					return !!ipCookie(AUTHENTICATION_COOKIE_KEY);
 				}
 
 				return {

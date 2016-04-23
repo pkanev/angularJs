@@ -4,9 +4,9 @@
 	// Declare app level module which depends on views, and components
 	angular.module('issueTrackingSystem', [
 	  'ngRoute',
-	  'ngCookies',
 	  'angular-loading-bar',
 	  'ui.bootstrap.pagination',
+	  'ipCookie',
 	  'issueTrackingSystem.home',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
