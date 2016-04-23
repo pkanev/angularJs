@@ -2,21 +2,22 @@
 	'use strict';
 	angular.module('issueTrackingSystem.common', [])
 		.controller('MainCtrl', [
-			'$scope',
+			'$rootScope',
 			'$http',
+			'authentication',
 			'identity',
-			function($scope, $http, identity) {
+			function($rootScope, $http, authentication, identity) {
 				identity.getCurrentUser()
 					.then(function(user) {
-						$scope.currentUser = user;
-						$scope.isAuthenticated = true;
+						$rootScope.currentUser = user;
+						$rootScope.isAuthenticated = true;
+						$rootScope.isAdmin = user.isAdmin;
 					})
 
-				$scope.isAdmin = identity.isAdmin();
-
-				// if($scope.isAuthenticated) {
-				// 	identity.requestUserProfile();
-				// }
-
+				$rootScope.logout = function() {
+					authentication.logout();
+					$rootScope.isAuthenticated = false;
+					$rootScope.isAdmin = false;
+				}
 			}]);	
 })();

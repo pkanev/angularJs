@@ -2,9 +2,20 @@
 	'use strict';
 	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectCollection'])
 		.config(['$routeProvider', function($routeProvider) {
+			var routeChecks = {
+				authenticated: ['$q', 'identity', function($q, identity) {
+					if(identity.isAuthenticated()) {
+						return $q.when(true);
+					} else {
+						return $q.reject('Unauthorized');
+					}
+				}]
+			};
+
 			$routeProvider.when('/projects', {
 				templateUrl: 'app/projects/projects.html',
-				controller: 'ProjectsCtrl'
+				controller: 'ProjectsCtrl',
+				resolve: routeChecks.authenticated
 			});
 		}])
 		.controller('ProjectsCtrl', [

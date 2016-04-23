@@ -11,7 +11,13 @@
 			'$scope',
 			'$location',
 			'authentication',
-			function($scope, $location, authentication) {
+			'identity',
+			function($scope, $location, authentication, identity) {
+				if(identity.isAuthenticated()) {
+					$location.path('/projects');
+				}
+
+
 				$scope.login = function(user) {
 					authentication.loginUser(user)
 						.then(function(loggedInUser) {

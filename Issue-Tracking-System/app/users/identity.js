@@ -92,6 +92,15 @@
 					return !!ipCookie(AUTHENTICATION_COOKIE_KEY);
 				}
 
+				function isAdmin() {
+					var userAdminDeferred = $q.defer();
+					getCurrentUser()
+						.then(function(user) {
+							userAdminDeferred.resolve(user.isAdmin);
+						})
+					return userAdminDeferred.promise;
+				}
+
 				return {
 					getCurrentUser: getCurrentUser,
 					getToken: getToken,
@@ -101,9 +110,7 @@
 					requestUserProfile: requestUserProfile,
 					removeUserProfile: removeUserProfile,
 					isAuthenticated: isAuthenticated,
-					isAdmin: function() {
-						return true;
-					}
+					isAdmin: isAdmin,
 				};
 
 			}
