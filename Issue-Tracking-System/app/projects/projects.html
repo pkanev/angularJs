@@ -1,9 +1,9 @@
-<pagination total-items="projects.length" ng-model="projectsParams.startPage"
-items-per-page="projectsParams.pageSize" ng-change="reloadProjects()"
-max-size="9" boundary-links="true"></pagination>
+<div>
+	<input ng-model="searchBox.Name" />
+</div>
 <div>
 	<ul>
-		<li ng-repeat="project in projects">
+		<li ng-repeat="project in projects | filter: searchBox">
 			<span>{{project.Name}} <a href="#/projects/{{project.Id}}" class="btn btn-info">View</a></span>
 		</li>
 	</ul>
@@ -11,3 +11,6 @@ max-size="9" boundary-links="true"></pagination>
 <div ng-if="projects.length==0" class="box no-data">
 No projects found.
 </div>
+<pagination total-items="totalProjects" ng-model="projectsParams.pageNumber"
+items-per-page="projectsParams.pageSize" ng-change="reloadProjects()"
+max-size="9" boundary-links="true"></pagination>

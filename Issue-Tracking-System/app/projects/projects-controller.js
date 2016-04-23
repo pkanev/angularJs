@@ -12,7 +12,7 @@
 				}]
 			};
 
-			$routeProvider.when('/projects', {
+			$routeProvider.when('/projects/', {
 				templateUrl: 'app/projects/projects.html',
 				controller: 'ProjectsCtrl',
 				resolve: routeChecks.authenticated
@@ -24,14 +24,18 @@
 			'PAGE_SIZE',
 			function($scope, projectCollection, PAGE_SIZE) {
 				$scope.projectsParams = {
-		        	'startPage' : 1,
-					'pageSize' : PAGE_SIZE
+		        	'pageNumber' : 1,
+					'pageSize' : PAGE_SIZE,
 		        };
 
 		        $scope.reloadProjects = function() {
 		            projectCollection.getAllProjects($scope.projectsParams)
 		            	.then(function (projects) {
-		            		$scope.projects = projects;
+		            		$scope.totalProjects = projects.length;
+                            var start = ($scope.projectsParams['pageNumber']-1) * $scope.projectsParams['pageSize'];
+                            var end = start + $scope.projectsParams['pageSize'];
+                            var result = projects.slice(start, end);
+		            		$scope.projects = result;
 		            	})
 		        };
 

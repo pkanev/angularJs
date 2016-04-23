@@ -9,7 +9,7 @@
                 function getAllProjects(params) {                
                     var deferred = $q.defer();
                     
-                    $http.get(BASE_URL + 'projects', {params: params})
+                    $http.get(BASE_URL + 'projects/', {params: params})
                         .then(function(response) {
                             deferred.resolve(response.data);
                         });
