@@ -27,6 +27,7 @@
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
 		        };
+        		$scope.criteria = 'none';
 
 		        $scope.reloadProjects = function() {
 		            projectCollection.getAllProjects($scope.projectsParams)
@@ -34,8 +35,9 @@
 		            		$scope.totalProjects = projects.length;
                             var start = ($scope.projectsParams['pageNumber']-1) * $scope.projectsParams['pageSize'];
                             var end = start + $scope.projectsParams['pageSize'];
-                            var result = projects.slice(start, end);
-		            		$scope.projects = result;
+                            var projectsPerPage = projects.slice(start, end);
+		            		$scope.projectsPerPage = projectsPerPage;
+		            		$scope.allProjects = projects;
 		            	})
 		        };
 

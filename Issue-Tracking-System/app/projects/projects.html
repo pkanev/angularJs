@@ -1,16 +1,68 @@
-<div>
-	<input ng-model="searchBox.Name" />
+<div class="row">
+	<div class="col-md-3">
+		<div class="col-md-4">
+			Criteria:
+		</div>
+		<div class="col-md-8">
+			<select class="form-control col-md-8" ng-model="criteria">
+				<option value="none">None</option>
+				<option value="name">Name</option>
+				<option value="lead">Leader</option>
+		    </select>			
+		</div>
+	</div>
+	<div ng-show="criteria!='none'" class="col-md-9">
+		Search projects: 
+		<input ng-show="criteria=='name'" ng-model="search.Name" />
+		<input ng-show="criteria=='lead'" ng-model="search.Lead.Username" />
+	</div>
 </div>
-<div>
-	<ul>
-		<li ng-repeat="project in projects | filter: searchBox">
-			<span>{{project.Name}} <a href="#/projects/{{project.Id}}" class="btn btn-info">View</a></span>
-		</li>
-	</ul>
+<div class="row">
+<div ng-if="criteria=='none'">
+	<table class="table table-striped table-hover ">
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Project Name</th>
+				<th>Project Lead</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="project in projectsPerPage">
+				<td>{{project.ProjectKey}}</td>
+				<td>{{project.Name}}</td>
+				<td>{{project.Lead.Username}}</td>
+				<td><a href="#/projects/{{project.Id}}" class="btn btn-info">View</a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
+<div ng-if="criteria!='none'">
+	<table class="table table-striped table-hover ">
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Project Name</th>
+				<th>Project Lead</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="project in allProjects | filter:search as filtered">
+				<td>{{project.ProjectKey}}</td>
+				<td>{{project.Name}}</td>
+				<td>{{project.Lead.Username}}</td>
+				<td><a href="#/projects/{{project.Id}}" class="btn btn-info">View</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
 <div ng-if="projects.length==0" class="box no-data">
 No projects found.
 </div>
-<pagination total-items="totalProjects" ng-model="projectsParams.pageNumber"
+<pagination ng-if="criteria=='none'" total-items="totalProjects" ng-model="projectsParams.pageNumber"
 items-per-page="projectsParams.pageSize" ng-change="reloadProjects()"
 max-size="9" boundary-links="true"></pagination>
+</div>
