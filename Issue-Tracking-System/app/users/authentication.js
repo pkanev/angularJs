@@ -25,9 +25,8 @@
 						.then(function(response) {
 							//should automatically login user
 							deferred.resolve(identity.getToken(user));
-						}, function(error) {
-
 						});
+						
 					return deferred.promise;
 				}
 
@@ -37,9 +36,8 @@
 					identity.getToken(user)
 						.then(function(response) {
 							deferred.resolve(response);
-						}, function(error) {
-
 						});
+
 					return deferred.promise;
 				}
 

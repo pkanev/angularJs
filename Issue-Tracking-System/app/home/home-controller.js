@@ -29,9 +29,7 @@
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
 						$location.path('/projects');
-					}), function(err) {
-						console.log(err);
-					};
+					});
 				};
 			}
 		])

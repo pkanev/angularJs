@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    angular.module('issueTrackingSystem.projects.projectCollection', [])
-        .factory('projectCollection', [
+    angular.module('issueTrackingSystem.projects.projectServices', [])
+        .factory('projectServices', [
             '$http',
             '$q',
             'BASE_URL',
@@ -16,9 +16,21 @@
                     
                     return deferred.promise;
                 }
+
+                function getProjectById(projectId){
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'projects/' + projectId)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
                 
                 return {
-                    getAllProjects: getAllProjects
+                    getAllProjects: getAllProjects,
+                    getProjectById: getProjectById
                 }
-        }]);    
+        }]);   
 })();

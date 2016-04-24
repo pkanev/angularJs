@@ -1,10 +1,17 @@
 (function() {
 	'use strict';
-	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectCollection'])
+	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			var routeChecks = {
-				authenticated: ['$q', 'identity', function($q, identity) {
+				isAuthenticated: ['$q', 'identity', function($q, identity) {
 					if(identity.isAuthenticated()) {
+						return $q.when(true);
+					} else {
+						return $q.reject('Unauthorized');
+					}
+				}],
+				isAdmin: ['$q', 'identity', function($q, identity) {
+					if(identity.isAdmin()) {
 						return $q.when(true);
 					} else {
 						return $q.reject('Unauthorized');
@@ -15,14 +22,20 @@
 			$routeProvider.when('/projects/', {
 				templateUrl: 'app/projects/projects.html',
 				controller: 'ProjectsCtrl',
-				resolve: routeChecks.authenticated
+				resolve: routeChecks.isAuthenticated
+			});
+			$routeProvider.when('/projects/:id', {
+				templateUrl: 'app/projects/project-by-id.html',
+				controller: 'ProjectByIdCtrl',
+				resolve: routeChecks.isAuthenticated
 			});
 		}])
 		.controller('ProjectsCtrl', [
 			'$scope',
-			'projectCollection',
+			'$location',
+			'projectServices',
 			'PAGE_SIZE',
-			function($scope, projectCollection, PAGE_SIZE) {
+			function($scope, $location, projectServices, PAGE_SIZE) {
 				$scope.projectsParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
@@ -30,7 +43,7 @@
         		$scope.criteria = 'none';
 
 		        $scope.reloadProjects = function() {
-		            projectCollection.getAllProjects($scope.projectsParams)
+		            projectServices.getAllProjects($scope.projectsParams)
 		            	.then(function (projects) {
 		            		$scope.totalProjects = projects.length;
                             var start = ($scope.projectsParams['pageNumber']-1) * $scope.projectsParams['pageSize'];
@@ -42,6 +55,23 @@
 		        };
 
 		        $scope.reloadProjects();
+
+		        $scope.loadProjectById = function(projectId){
+        			var path = '/projects/' + projectId;
+        			$location.path(path);
+		        };
+			}
+		])
+		.controller('ProjectByIdCtrl', [
+			'$scope',
+			'$routeParams',
+			'projectServices',
+			function($scope, $routeParams, projectServices) {
+				projectServices.getProjectById($routeParams.id)
+					.then(function(project) {
+						$scope.project = project;
+						console.log(project);
+					});
 			}
 		])
 })();

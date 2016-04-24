@@ -1,0 +1,25 @@
+<div class="row light-blue">
+	Project page
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<div>
+			<strong>{{project.Name}}</strong>
+			<button class="btn btn-success" ng-click="">Edit</button>
+			<button class="btn btn-success" ng-click="">Add issue</button>		
+		</div>
+		<div>
+			<p>Product Key: {{project.ProjectKey}}</p>
+			Name: <input type="text" ng-model="project.Name" />
+			<br>
+			Description: <input type="text" ng-model="project.Description" />
+			<br>
+			LeadId: (current Id: {{project.Lead.Id}}) <input type="text" ng-model="project.Lead.Username">
+			<br>
+			Labels: <span ng-repeat="label in project.Labels">{{label.Name}}, </span>
+			<br>
+			Priorities:<span ng-repeat="priority in project.Priorities">{{priority.Name}}, </span>
+		</div>
+	</div>
+	<div class="col-md-4"></div>
+</div>
