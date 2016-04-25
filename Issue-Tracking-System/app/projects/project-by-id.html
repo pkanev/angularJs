@@ -1,49 +1,64 @@
-<div class="row light-blue">
-	Project page
-</div>
 <div class="row">
-	<div class="col-md-6">
-		<form name="loginUserForm" class="form-inline">
-			<legend>
-				Product Key: {{project.ProjectKey}}
-				<button class="btn btn-success" ng-click="">Edit</button>
-				<button class="btn btn-success" ng-click="">Add issue</button>
-			</legend>
-			<fieldset>
-				<div class="form-group-md">
-					<label for="name" class="col-md-8 control-label">Name</label>
-					<div class="col-md-4">
-						<input type="text" class="form-control" required="required" ng-model="project.Name" id="name" />
-					</div>
+	<h3>Project</h3>
+	<form name="loginUserForm" class="form-inline">
+		<legend>
+			Project Key: {{project.ProjectKey}}
+			<br>
+			<button class="btn btn-success" ng-click="">Edit</button>
+			<button class="btn btn-success" ng-click="">Add issue</button>
+		</legend>
+		<fieldset>
+			<div class="form-group-sm">
+				<label for="name" class="col-sm-5 control-label">Name</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Name" id="name" />
 				</div>
-				<div class="form-group-md">
-					<label for="description" class="col-md-8 control-label">Description</label>
-					<div class="col-md-4">
-						<input type="text" class="form-control" required="required" ng-model="project.Description" id="description" />
-					</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="description" class="col-sm-5 control-label">Description</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Description" id="description" />
 				</div>
-				<div class="form-group-md">
-					<label for="lead" class="col-md-8 control-label">Lead (current Id: {{project.Lead.Id}})</label>
-					<div class="col-md-4">
-						<input type="text" class="form-control" required="required" ng-model="project.Lead.Username" id="lead" />
-					</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="lead" class="col-sm-5 control-label">Lead (current Id: {{project.Lead.Id}})</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Lead.Username" id="lead" />
 				</div>
-			</fieldset>
-		</form>
-		<p>
-			<strong >Labels: </strong>
-			<span ng-repeat="label in project.Labels"><button class="btn btn-info">{{label.Name}}</button> </span>
-			<span ng-if="project.Labels.length == 0">No labels were found</span>
-		</p>
-		<p>
-			<strong >Priorities: </strong>
-			<span ng-repeat="priority in project.Priorities"><button class="btn btn-danger">{{priority.Name}}</button> </span>
-			<span ng-if="project.Priorities.length == 0">No priorities were found</span>
-		</p>
-	</div>
-	<div class="col-md-6">
-		<div ng-repeat="issue in projectIssues">
-			{{issue.Description}}
-		</div>
+			</div>
+		</fieldset>
+	</form>
+	<p>
+		<strong >Labels: </strong>
+		<span ng-repeat="label in project.Labels"><button class="btn btn-info btn-sm">{{label.Name}}</button> </span>
+		<span ng-if="project.Labels.length == 0">No labels were found</span>
+	</p>
+	<p>
+		<strong >Priorities: </strong>
+		<span ng-repeat="priority in project.Priorities"><button class="btn btn-danger btn-sm">{{priority.Name}}</button> </span>
+		<span ng-if="project.Priorities.length == 0">No priorities were found</span>
+	</p>
+<div class="row">
+	<h3>Issues</h3>
+	<table class="table table-striped table-hover table-condensed">
+		<thead>
+			<tr>
+				<th class="col-sm-2">Title</th>
+				<th class="col-md-5">Description</th>
+				<th class="col-md-3">Due Date:</th>
+				<th class="col-md-2">Assignee</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="issue in issuesPerPage">
+				<td class="col-md-2"><a class="btn btn-link permalink-section" ng-click="">{{issue.Title}}</a></td>
+				<td class="col-md-5">{{issue.Description}}</td>
+				<td class="col-md-3">{{issue.DueDate}}</td>
+				<td class="col-md-2">{{issue.Assignee.Username}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<pagination total-items="totalIssues" ng-model="issueParams.pageNumber" items-per-page="issueParams.pageSize" ng-change="loadPagination()" max-size="9" boundary-links="true"></pagination>
+	<div ng-if="projectIssues.length == 0">No issues have been assigned to this project yet.</div>
 	</div>
 </div>
