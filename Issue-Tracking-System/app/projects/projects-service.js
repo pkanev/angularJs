@@ -28,9 +28,21 @@
                     return deferred.promise;
                 }
                 
+                function getIssuesByProject(projectId) {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'projects/' + projectId + '/issues')
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllProjects: getAllProjects,
-                    getProjectById: getProjectById
+                    getProjectById: getProjectById,
+                    getIssuesByProject: getIssuesByProject
                 }
         }]);   
 })();

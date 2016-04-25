@@ -2,24 +2,48 @@
 	Project page
 </div>
 <div class="row">
-	<div class="col-md-8">
-		<div>
-			<strong>{{project.Name}}</strong>
-			<button class="btn btn-success" ng-click="">Edit</button>
-			<button class="btn btn-success" ng-click="">Add issue</button>		
-		</div>
-		<div>
-			<p>Product Key: {{project.ProjectKey}}</p>
-			Name: <input type="text" ng-model="project.Name" />
-			<br>
-			Description: <input type="text" ng-model="project.Description" />
-			<br>
-			LeadId: (current Id: {{project.Lead.Id}}) <input type="text" ng-model="project.Lead.Username">
-			<br>
-			Labels: <span ng-repeat="label in project.Labels">{{label.Name}}, </span>
-			<br>
-			Priorities:<span ng-repeat="priority in project.Priorities">{{priority.Name}}, </span>
+	<div class="col-md-6">
+		<form name="loginUserForm" class="form-inline">
+			<legend>
+				Product Key: {{project.ProjectKey}}
+				<button class="btn btn-success" ng-click="">Edit</button>
+				<button class="btn btn-success" ng-click="">Add issue</button>
+			</legend>
+			<fieldset>
+				<div class="form-group-md">
+					<label for="name" class="col-md-8 control-label">Name</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" required="required" ng-model="project.Name" id="name" />
+					</div>
+				</div>
+				<div class="form-group-md">
+					<label for="description" class="col-md-8 control-label">Description</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" required="required" ng-model="project.Description" id="description" />
+					</div>
+				</div>
+				<div class="form-group-md">
+					<label for="lead" class="col-md-8 control-label">Lead (current Id: {{project.Lead.Id}})</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" required="required" ng-model="project.Lead.Username" id="lead" />
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<p>
+			<strong >Labels: </strong>
+			<span ng-repeat="label in project.Labels"><button class="btn btn-info">{{label.Name}}</button> </span>
+			<span ng-if="project.Labels.length == 0">No labels were found</span>
+		</p>
+		<p>
+			<strong >Priorities: </strong>
+			<span ng-repeat="priority in project.Priorities"><button class="btn btn-danger">{{priority.Name}}</button> </span>
+			<span ng-if="project.Priorities.length == 0">No priorities were found</span>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<div ng-repeat="issue in projectIssues">
+			{{issue.Description}}
 		</div>
 	</div>
-	<div class="col-md-4"></div>
 </div>

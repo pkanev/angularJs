@@ -72,6 +72,12 @@
 						$scope.project = project;
 						console.log(project);
 					});
+					
+				projectServices.getIssuesByProject($routeParams.id)
+					.then(function(issues) {
+						$scope.projectIssues = issues;
+						console.log(issues);
+					});
 			}
 		])
 })();
