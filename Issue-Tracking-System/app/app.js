@@ -8,6 +8,7 @@
 	  'ui.bootstrap.pagination',
 	  'ipCookie',
 	  'issueTrackingSystem.home',
+	  'issueTrackingSystem.dashboard',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
 	  'issueTrackingSystem.projects'
@@ -50,6 +51,7 @@
 	.run(['$rootScope', '$location', 'identity', function($rootScope, $location, identity) {
 		$rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
 			if (rejection == 'Unauthorized') {
+				toastr.error('You are not authorized to visit this page.');
 				$location.path('/');
 			}
 

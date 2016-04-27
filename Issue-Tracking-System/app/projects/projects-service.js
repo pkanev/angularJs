@@ -6,10 +6,10 @@
             '$q',
             'BASE_URL',
             function($http, $q, BASE_URL) {
-                function getAllProjects(params) {                
+                function getAllProjects(params, filter) {                
                     var deferred = $q.defer();
                     
-                    $http.get(BASE_URL + 'projects/', {params: params})
+                    $http.get(BASE_URL + 'projects/?filter=' + filter, {params: params})
                         .then(function(response) {
                             deferred.resolve(response.data);
                         });

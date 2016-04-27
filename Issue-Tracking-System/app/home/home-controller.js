@@ -12,23 +12,26 @@
 			'$location',
 			'authentication',
 			'identity',
-			function($scope, $location, authentication, identity) {
+			'toastr',
+			function($scope, $location, authentication, identity, toastr) {
 				if(identity.isAuthenticated()) {
-					$location.path('/projects');
+					$location.path('/dashboard');
 				}
 
 
 				$scope.login = function(user) {
 					authentication.loginUser(user)
 						.then(function(loggedInUser) {
-							$location.path('/projects');
+							toastr.info('Welcome, ' + loggedInUser.userName);
+							$location.path('/dashboard');
 						})
 				};
 
 				$scope.register = function(user) {
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
-						$location.path('/projects');
+						toastr.info('Successful registration');
+						$location.path('/dashboard');
 					});
 				};
 			}

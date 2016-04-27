@@ -1,21 +1,6 @@
 <div class="row">
-	<div class="col-md-3">
-		<div class="col-md-4">
-			Criteria:
-		</div>
-		<div class="col-md-8">
-			<select class="form-control col-md-8" ng-model="criteria">
-				<option value="none">None</option>
-				<option value="name">Name</option>
-				<option value="lead">Leader</option>
-		    </select>			
-		</div>
-	</div>
-	<div ng-show="criteria!='none'" class="col-md-9">
-		Search projects: 
-		<input ng-show="criteria=='name'" ng-model="search.Name" />
-		<input ng-show="criteria=='lead'" ng-model="search.Lead.Username" />
-	</div>
+	Criteria:
+	<input ng-model="filter" /> <a ng-click="reloadProjects()" class="btn btn-success btn-sm">Search!</a>
 </div>
 <div class="row">
 <div ng-if="criteria=='none'">
@@ -38,31 +23,9 @@
 		</tbody>
 	</table>
 </div>
-<div ng-if="criteria!='none'">
-	<table class="table table-striped table-hover ">
-		<thead>
-			<tr>
-				<th>Key</th>
-				<th>Project Name</th>
-				<th>Project Lead</th>
-				<th>Details</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="project in allProjects | filter:search as filtered">
-				<td>{{project.ProjectKey}}</td>
-				<td>{{project.Name}}</td>
-				<td>{{project.Lead.Username}}</td>
-				<td><a ng-click="loadProjectById(project.Id)" class="btn btn-info">View</a></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
 
 <div ng-if="projects.length==0" class="box no-data">
 No projects found.
 </div>
-<pagination ng-if="criteria=='none'" total-items="totalProjects" ng-model="projectsParams.pageNumber"
-items-per-page="projectsParams.pageSize" ng-change="reloadProjects()"
-max-size="9" boundary-links="true"></pagination>
+<pagination total-items="totalProjects" ng-model="projectsParams.pageNumber" items-per-page="projectsParams.pageSize" ng-change="reloadProjects()" max-size="9" boundary-links="true"></pagination>
 </div>

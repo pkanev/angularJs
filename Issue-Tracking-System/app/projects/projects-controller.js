@@ -3,13 +3,6 @@
 	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			var routeChecks = {
-				isAuthenticated: ['$q', 'identity', function($q, identity) {
-					if(identity.isAuthenticated()) {
-						return $q.when(true);
-					} else {
-						return $q.reject('Unauthorized');
-					}
-				}],
 				isAdmin: ['$q', 'identity', function($q, identity) {
 					if(identity.isAdmin()) {
 						return $q.when(true);
@@ -22,12 +15,12 @@
 			$routeProvider.when('/projects/', {
 				templateUrl: 'app/projects/projects.html',
 				controller: 'ProjectsCtrl',
-				resolve: routeChecks.isAuthenticated
+				resolve: routeChecks.isAdmin
 			});
 			$routeProvider.when('/projects/:id', {
 				templateUrl: 'app/projects/project-by-id.html',
 				controller: 'ProjectByIdCtrl',
-				resolve: routeChecks.isAuthenticated
+				resolve: routeChecks.isAdmin
 			});
 		}])
 		.controller('ProjectsCtrl', [
@@ -41,16 +34,13 @@
 					'pageSize' : PAGE_SIZE,
 		        };
         		$scope.criteria = 'none';
+        		$scope.filter = $scope.filter || '';
 
 		        $scope.reloadProjects = function() {
-		            projectServices.getAllProjects($scope.projectsParams)
+		            projectServices.getAllProjects($scope.projectsParams, $scope.filter)
 		            	.then(function (projects) {
-		            		$scope.totalProjects = projects.length;
-                            var start = ($scope.projectsParams['pageNumber']-1) * $scope.projectsParams['pageSize'];
-                            var end = start + $scope.projectsParams['pageSize'];
-                            var projectsPerPage = projects.slice(start, end);
-		            		$scope.projectsPerPage = projectsPerPage;
-		            		$scope.allProjects = projects;
+		            		$scope.totalProjects = projects.TotalCount;
+                            $scope.projectsPerPage = projects.Projects;
 		            	})
 		        };
 

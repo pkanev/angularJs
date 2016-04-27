@@ -93,12 +93,9 @@
 				}
 
 				function isAdmin() {
-					var userAdminDeferred = $q.defer();
-					getCurrentUser()
-						.then(function(user) {
-							userAdminDeferred.resolve(user.isAdmin);
-						})
-					return userAdminDeferred.promise;
+					if(currentUser && currentUser.isAdmin) {
+						return true;
+					}
 				}
 
 				return {
