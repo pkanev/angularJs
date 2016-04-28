@@ -55,9 +55,10 @@
 		.controller('ProjectByIdCtrl', [
 			'$scope',
 			'$routeParams',
+			'$location',
 			'projectServices',
 			'PAGE_SIZE',
-			function($scope, $routeParams, projectServices, PAGE_SIZE) {
+			function($scope, $routeParams, $location, projectServices, PAGE_SIZE) {
 				$scope.issueParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
@@ -66,16 +67,24 @@
 				projectServices.getProjectById($routeParams.id)
 					.then(function(project) {
 						$scope.project = project;
-						console.log(project);
 					});
 					
 				projectServices.getIssuesByProject($routeParams.id)
 					.then(function(issues) {
 						$scope.projectIssues = issues;
-						console.log(issues);
 					}).then(function() {
 						$scope.loadPagination();						
 					});
+
+				$scope.loadEditProcect = function(projectId) {
+					var path = '/projects/' + projectId + '/edit';
+					$location.path(path);
+				}
+
+				$scope.loadAddProject = function() {
+					var path = '/projects/add';
+					$location.path(path);	
+				}
 
 				$scope.loadPagination = function() {
             		$scope.totalIssues = $scope.projectIssues.length;

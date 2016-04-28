@@ -1,0 +1,42 @@
+<div class="row">
+	<h3>Edit project</h3>
+	<form name="editProjectForm" class="form-inline">
+		<legend>
+			Project Key: {{project.ProjectKey}}
+			<br>
+			<button class="btn btn-success" ng-click="editProcect(project.Id)">Edit!</button>
+		</legend>
+		<fieldset>
+			<div class="form-group-sm">
+				<label for="name" class="col-sm-5 control-label">Name</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Name" id="name" />
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="description" class="col-sm-5 control-label">Description</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Description" id="description" />
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="lead" class="col-sm-5 control-label">Lead (current Id: {{project.Lead.Id}})</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" required="required" ng-model="project.Lead.Username" id="lead" />
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<h4>Labels:</h4>
+			<div ng-repeat="label in labels"><input type="text" class="form-control" value="{{label.Name}}" /></div>
+			<div ng-if="labels.length == 0">No labels were found</div>
+			<button class="btn btn-success btn-sm" ng-click="addNewLabel()">Add label</button>
+			<button class="btn btn-danger btn-sm" ng-click="removeLabel()">Remove label</button>
+		</fieldset>
+		<fieldset>
+			<h4>Priorities: </h4>
+			<div ng-repeat="priority in priorities"><input type="text" class="form-control" value="{{priority.Name}}" /></div>
+			<div ng-if="priorities.length == 0">No priorities were found</div>
+		</fieldset>
+	</form>
+</div>
