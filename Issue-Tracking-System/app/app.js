@@ -11,6 +11,7 @@
 	  'issueTrackingSystem.dashboard',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
+	  'issueTrackingSystem.projects.create',
 	  'issueTrackingSystem.projects',
 	  'issueTrackingSystem.projects.edit'
 	])

@@ -39,10 +39,22 @@
                     return deferred.promise;
                 }
 
+                function editProject(id, projectData) {
+                    var deferred = $q.defer();
+                    $http.put(BASE_URL + 'projects/' + id, projectData)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllProjects: getAllProjects,
                     getProjectById: getProjectById,
-                    getIssuesByProject: getIssuesByProject
+                    getIssuesByProject: getIssuesByProject,
+                    editProject: editProject
                 }
-        }]);   
+            }
+        ]);   
 })();

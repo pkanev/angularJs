@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	angular.module('issueTrackingSystem.projects.edit', ['issueTrackingSystem.projects.projectServices'])
+	angular.module('issueTrackingSystem.projects.edit', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			var routeChecks = {
 				isAdmin: ['$q', 'identity', function($q, identity) {
@@ -21,25 +21,70 @@
 		.controller('EditProjectCtrl', [
 			'$scope',
 			'$routeParams',
+			'$location',
 			'projectServices',
-			function($scope, $routeParams, projectServices) {
+			'userServices',
+			'toastr',
+			function($scope, $routeParams, $location, projectServices, userServices, toastr) {
 				projectServices.getProjectById($routeParams.id)
 					.then(function(project) {
 						$scope.project = project;
-						$scope.labels = project.Labels;
-						$scope.priorities = project.Priorities;
+					})
+					.then(function() {
+						userServices.getAllUsers()
+							.then(function(users) {
+								$scope.users = users;
+								$scope.project.LeadId = $scope.project.Lead.Id;
+							});						
 					});
 
 				$scope.addNewLabel = function() {
-					var newLabel ={
-						Name:''
+					var newLabel = {
+						Name: ''
 					};
 
-					$scope.labels.push(newLabel);
+					$scope.project.Labels.push(newLabel);
 				};
 
 				$scope.removeLabel = function() {
-					$scope.labels.pop();
+					$scope.project.Labels.pop();
+				};
+
+				$scope.addNewPriority = function() {
+					var newPriority = {
+						Name: ''
+					};
+
+					$scope.project.Priorities.push(newPriority);
+				};
+
+				$scope.removePriority = function() {
+					$scope.project.Priorities.pop();
+				};
+
+				$scope.editProject = function(project) {
+					var data = {
+						Name: project.Name,
+						Description: project.Description,
+						Labels: [],
+						Priorities: [],
+						LeadId: project.LeadId
+					};
+
+					project.Labels.forEach(function(label) {
+						data.Labels.push({Name: label.Name});
+					});
+
+					project.Priorities.forEach(function(priority) {
+						data.Priorities.push({Name: priority.Name});
+					});
+
+					projectServices.editProject(project.Id, data)
+						.then(function(editedProject) {
+							toastr.success(editedProject.Name + ' was edited successfully.');
+							var path = '/projects/' + editedProject.Id;
+							$location.path(path);
+						})
 				};
 
 			}
