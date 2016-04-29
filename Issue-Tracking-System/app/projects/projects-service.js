@@ -49,11 +49,34 @@
                     return deferred.promise;
                 }
 
+                function createProjectKey(projectName) {
+                    projectName = projectName || '';
+                    var nameList = projectName.split(/\s+/);
+                    var key ='';
+                    nameList.forEach(function(name) {
+                        key += name.substring(0,1);
+                    });
+
+                    return key;
+                }
+
+                function createProject(project) {
+                    var deferred = $q.defer();
+                    $http.post(BASE_URL + 'projects', project)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     getAllProjects: getAllProjects,
                     getProjectById: getProjectById,
                     getIssuesByProject: getIssuesByProject,
-                    editProject: editProject
+                    editProject: editProject,
+                    createProjectKey: createProjectKey,
+                    createProject: createProject
                 }
             }
         ]);   

@@ -2,20 +2,23 @@
 	'use strict';
 	angular.module('issueTrackingSystem.projects.create', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
 		.config(['$routeProvider', function($routeProvider) {
-			var routeChecks = {
-				isAdmin: ['$q', 'identity', function($q, identity) {
-					if(identity.isAdmin()) {
-						return $q.when(true);
-					} else {
-						return $q.reject('Unauthorized');
-					}
-				}]
-			};
+			// var routeChecks = {
+			// 	isAdmin: ['$q', 'identity', function($q, identity) {
+			// 		if(identity.isAdmin()) {
+			// 			return $q.when(true);
+			// 		} else {
+			// 			return $q.reject('Unauthorized');
+			// 		}
+			// 	}]
+			// };
 
 			$routeProvider.when('/projects/add', {
 				templateUrl: 'app/projects/create/create-project.html',
 				controller: 'CreateProjectCtrl',
-				resolve: routeChecks.isAdmin
+				access: {
+					isAdmin: true
+				}
+				//resolve: routeChecks.isAdmin
 			});
 		}])
 		.controller('CreateProjectCtrl', [
@@ -32,7 +35,12 @@
 
 				$scope.project = {
 					Labels: [],
-					Priorities: [] 
+					Priorities: [],
+					Name: ''
+				};
+
+				$scope.updateKey = function() {
+					$scope.project.ProjectKey = projectServices.createProjectKey($scope.project.Name);
 				};
 
 				$scope.addNewLabel = function() {
@@ -60,8 +68,12 @@
 				};
 
 				$scope.createProject = function(project) {
-
-				}
+					projectServices.createProject(project)
+						.then(function(createdProject) {
+							var path = '/projects/' + createdProject.Id;
+							$location.path(path);
+						})
+				};
 			}
 		]);
 })();

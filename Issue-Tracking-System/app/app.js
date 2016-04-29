@@ -58,8 +58,19 @@
 			}
 
 		});
-		$rootScope.$on("$routeChangeSuccess", function(ev){
+		$rootScope.$on("$routeChangeSuccess", function(ev, current, previous){
 			identity.refreshCookie();
+			if(current.access) {
+				identity.checkAuthentication(current.access)
+					.then(function(response) {
+						if(response && !response.isAccessible)
+						{
+							toastr.error('You are not authorized to visit this page.');
+							$location.path(previous || '/');
+						}
+					})
+			}
+
 			if(identity.isAuthenticated()) {
 				identity.getCurrentUser()
 					.then(function(user) {

@@ -2,25 +2,31 @@
 	'use strict';
 	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectServices'])
 		.config(['$routeProvider', function($routeProvider) {
-			var routeChecks = {
-				isAdmin: ['$q', 'identity', function($q, identity) {
-					if(identity.isAdmin()) {
-						return $q.when(true);
-					} else {
-						return $q.reject('Unauthorized');
-					}
-				}]
-			};
+			// var routeChecks = {
+			// 	isAdmin: ['$q', 'identity', function($q, identity) {
+			// 		if(identity.isAdmin()) {
+			// 			return $q.when(true);
+			// 		} else {
+			// 			return $q.reject('Unauthorized');
+			// 		}
+			// 	}]
+			// };
 
 			$routeProvider.when('/projects/', {
 				templateUrl: 'app/projects/projects.html',
 				controller: 'ProjectsCtrl',
-				resolve: routeChecks.isAdmin
+				access: {
+					isAdmin: true
+				}
+				// resolve: routeChecks.isAdmin
 			});
 			$routeProvider.when('/projects/:id', {
 				templateUrl: 'app/projects/project-by-id.html',
 				controller: 'ProjectByIdCtrl',
-				resolve: routeChecks.isAdmin
+				access: {
+					isAdminOrLead: true
+				}
+				// resolve: routeChecks.isAdmin
 			});
 		}])
 		.controller('ProjectsCtrl', [

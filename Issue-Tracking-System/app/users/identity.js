@@ -1,12 +1,14 @@
 (function() {
-	angular.module('issueTrackingSystem.users.identity', [])
+	angular.module('issueTrackingSystem.users.identity', ['issueTrackingSystem.projects.projectServices'])
 		.factory('identity', [
 			'$http',
 			'$q',
 			'$httpParamSerializerJQLike',
+			'$routeParams',
 			'ipCookie',
+			'projectServices',
 			'BASE_URL',
-			function($http, $q, $httpParamSerializerJQLike, ipCookie, BASE_URL) {
+			function($http, $q, $httpParamSerializerJQLike, $routeParams, ipCookie, projectServices, BASE_URL) {
 				var deferred = $q.defer(),
 					currentUser = undefined,
 					AUTHENTICATION_COOKIE_KEY = '!__Authentication_Cookie_Key__!';
@@ -98,6 +100,51 @@
 					}
 				}
 
+				function isOwner(projectId) {
+					var deferredOwner = $q.defer();
+					projectServices.getProjectById(projectId)
+						.then(function(returnedProject) {
+							if (currentUser && (returnedProject.Lead.Id === currentUser.Id)) {
+								deferredOwner.resolve(true);
+							} else {
+								deferredOwner.resolve(false);
+							}
+						});
+					return deferredOwner.promise;
+				}
+
+				function checkAuthentication(condition) {
+					var deferredStatus = $q.defer();
+					if(condition.isAuthenticated) {
+						if(isAuthenticated()) {
+							deferredStatus.resolve({isAccessible: true});
+						} else {
+							deferredStatus.resolve({isAccessible: false});
+						}
+					} else if (condition.isAdmin){
+						if(isAdmin()) {
+							deferredStatus.resolve({isAccessible: true});
+						} else {
+							deferredStatus.resolve({isAccessible: false});
+						}
+					} else if (condition.isAdminOrLead) {
+						if(isAdmin()) {
+							deferredStatus.resolve({isAccessible: true});
+						} else {
+							isOwner($routeParams.id)
+								.then(function(isAllowed) {
+									if(isAllowed) {
+										deferredStatus.resolve({isAccessible: true});
+									} else {
+										deferredStatus.resolve({isAccessible: false});
+									} 
+								})
+						}
+					}
+
+					return deferredStatus.promise;
+				}
+
 				return {
 					getCurrentUser: getCurrentUser,
 					getToken: getToken,
@@ -108,6 +155,8 @@
 					removeUserProfile: removeUserProfile,
 					isAuthenticated: isAuthenticated,
 					isAdmin: isAdmin,
+					isOwner: isOwner,
+					checkAuthentication: checkAuthentication
 				};
 
 			}
