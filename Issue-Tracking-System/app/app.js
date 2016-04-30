@@ -8,7 +8,6 @@
 	  'ui.bootstrap.pagination',
 	  'ipCookie',
 	  'issueTrackingSystem.home',
-	  'issueTrackingSystem.dashboard',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
 	  'issueTrackingSystem.projects.create',
@@ -80,7 +79,6 @@
 				})
 			}
 		});
-
 	}])
 	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 	.constant('PAGE_SIZE', 5)

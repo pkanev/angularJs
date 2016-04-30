@@ -8,22 +8,26 @@
 			});
 		}])
 		.controller('HomeCtrl', [
+			'$rootScope',
 			'$scope',
 			'$location',
 			'authentication',
 			'identity',
 			'toastr',
-			function($scope, $location, authentication, identity, toastr) {
-				if(identity.isAuthenticated()) {
-					$location.path('/dashboard');
-				}
+			function($rootScope, $scope, $location, authentication, identity, toastr) {
 
+				$rootScope.isAuthenticated = identity.isAuthenticated();
+				$rootScope.isAdmin = identity.isAdmin();
+				$rootScope.currentUser = identity.getCurrentUser();
 
 				$scope.login = function(user) {
 					authentication.loginUser(user)
 						.then(function(loggedInUser) {
 							toastr.info('Welcome, ' + loggedInUser.userName);
-							$location.path('/dashboard');
+							$rootScope.currentUser = loggedInUser;
+							$rootScope.isAuthenticated = identity.isAuthenticated();
+							$rootScope.isAdmin = identity.isAdmin();
+							$location.path('/');
 						})
 				};
 
@@ -31,9 +35,20 @@
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
 						toastr.info('Successful registration');
-						$location.path('/dashboard');
+						$rootScope.currentUser = registeredUser;
+						$rootScope.isAuthenticated = identity.isAuthenticated();
+						$rootScope.isAdmin = identity.isAdmin();
+						$location.path('/');
 					});
 				};
+
+				$scope.loadProjects = function() {
+					$location.path('/projects/');
+				}
+
+				$scope.addProject = function() {
+					$location.path('/projects/add');
+				}
 			}
 		])
 	

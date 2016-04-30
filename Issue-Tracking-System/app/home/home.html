@@ -1,5 +1,5 @@
 <div class="margin-bottom-100"></div>
-<div class="row">
+<div ng-if="!isAuthenticated" class="row">
     <div class="col-md-4 col-md-offset-1 border">
         <div class="well well-md">  
           <form name="loginUserForm" class="form-inline">
@@ -57,4 +57,11 @@
             </form>
         </div>
     </div>
+</div>
+<div ng-if="isAuthenticated" class="row">
+  <a href="#/dashboard" class="btn btn-success btn-lg">Dashboard</a>
+  <span ng-if="isAdmin" >
+    <a ng-click="loadProjects()" class="btn btn-success btn-lg">Projects</a>
+    <a ng-click="addProject()" class="btn btn-success btn-lg">Create a project!</a>
+  </span>
 </div>

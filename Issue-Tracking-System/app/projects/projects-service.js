@@ -28,16 +28,16 @@
                     return deferred.promise;
                 }
                 
-                function getIssuesByProject(projectId) {
-                    var deferred = $q.defer();
+                // function getIssuesByProject(projectId) {
+                //     var deferred = $q.defer();
 
-                    $http.get(BASE_URL + 'projects/' + projectId + '/issues')
-                        .then(function(response) {
-                            deferred.resolve(response.data);
-                        });
+                //     $http.get(BASE_URL + 'projects/' + projectId + '/issues')
+                //         .then(function(response) {
+                //             deferred.resolve(response.data);
+                //         });
 
-                    return deferred.promise;
-                }
+                //     return deferred.promise;
+                // }
 
                 function editProject(id, projectData) {
                     var deferred = $q.defer();
@@ -73,7 +73,7 @@
                 return {
                     getAllProjects: getAllProjects,
                     getProjectById: getProjectById,
-                    getIssuesByProject: getIssuesByProject,
+                    // getIssuesByProject: getIssuesByProject,
                     editProject: editProject,
                     createProjectKey: createProjectKey,
                     createProject: createProject

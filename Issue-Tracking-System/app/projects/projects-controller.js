@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectServices'])
+	angular.module('issueTrackingSystem.projects', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.issues.issueServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			// var routeChecks = {
 			// 	isAdmin: ['$q', 'identity', function($q, identity) {
@@ -33,8 +33,9 @@
 			'$scope',
 			'$location',
 			'projectServices',
+			'issueServices',
 			'PAGE_SIZE',
-			function($scope, $location, projectServices, PAGE_SIZE) {
+			function($scope, $location, projectServices, issueServices, PAGE_SIZE) {
 				$scope.projectsParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
@@ -75,7 +76,7 @@
 						$scope.project = project;
 					});
 					
-				projectServices.getIssuesByProject($routeParams.id)
+				issueServices.getIssuesByProject($routeParams.id)
 					.then(function(issues) {
 						$scope.projectIssues = issues;
 					}).then(function() {
