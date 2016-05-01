@@ -17,9 +17,20 @@
                     return deferred.promise;
                 }
 
+                function getMyIssues(params, orderBy) {
+                    var deferred = $q.defer();
+                    
+                    $http.get(BASE_URL + 'issues/me?orderBy=' + orderBy, {params: params})
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+                    
+                    return deferred.promise;
+                }
+
             	return {
             		getIssuesByProject: getIssuesByProject,
-
+                    getMyIssues: getMyIssues
             	}
             }
 		])

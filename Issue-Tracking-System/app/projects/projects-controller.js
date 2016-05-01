@@ -64,8 +64,9 @@
 			'$routeParams',
 			'$location',
 			'projectServices',
+			'issueServices',
 			'PAGE_SIZE',
-			function($scope, $routeParams, $location, projectServices, PAGE_SIZE) {
+			function($scope, $routeParams, $location, projectServices, issueServices, PAGE_SIZE) {
 				$scope.issueParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,

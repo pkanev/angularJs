@@ -42,6 +42,10 @@
 					});
 				};
 
+				$scope.loadMyIssues = function() {
+					$location.path('/issues/me');
+				}
+
 				$scope.loadProjects = function() {
 					$location.path('/projects/');
 				}
