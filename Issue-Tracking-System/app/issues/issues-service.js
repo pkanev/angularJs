@@ -39,6 +39,17 @@
                     return deferred.promise;
                 }
 
+                function addIssue(issue) {
+                    var deferred = $q.defer();
+
+                    $http.post(BASE_URL + 'issues/', issue)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
                 function changeIssueStatus(issueId, statusId) {
                     var deferred = $q.defer();
 
@@ -54,6 +65,7 @@
             		getIssuesByProject: getIssuesByProject,
                     getMyIssues: getMyIssues,
                     getIssueById: getIssueById,
+                    addIssue: addIssue,
                     changeIssueStatus: changeIssueStatus
             	}
             }

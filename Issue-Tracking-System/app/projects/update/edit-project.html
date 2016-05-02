@@ -22,7 +22,7 @@
 			<div class="form-group-sm">
 				<label for="lead" class="col-sm-5 control-label">Lead (current Id: {{project.LeadId}})</label>
 				<div class="col-sm-4">
-					<select id="lead" class="form-control" ng-model="project.LeadId" ng-options="user.Id as user.Username for user in users">
+					<select id="lead" class="form-control" ng-model="project.LeadId" ng-options="user.Id as user.Username for user in users | orderBy : 'Username'">
 					</select>
 				</div>
 			</div>

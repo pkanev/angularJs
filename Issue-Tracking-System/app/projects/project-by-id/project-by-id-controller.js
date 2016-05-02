@@ -51,7 +51,7 @@
 				}
 
 				$scope.loadAddIssue = function(projectId) {
-					var path = '/issues/add';
+					var path = 'projects/' + projectId + '/issues/add';
 					$location.path(path);	
 				}
 

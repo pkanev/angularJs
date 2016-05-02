@@ -53,6 +53,10 @@
 				$scope.addProject = function() {
 					$location.path('/projects/add');
 				}
+
+				$scope.addIssue = function() {
+					$location.path('/issues/add');	
+				}
 			}
 		])
 	
