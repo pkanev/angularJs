@@ -28,9 +28,33 @@
                     return deferred.promise;
                 }
 
+                function getIssueById(issueId) {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'issues/' + issueId)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function changeIssueStatus(issueId, statusId) {
+                    var deferred = $q.defer();
+
+                    $http.put(BASE_URL + 'issues/' + issueId + '/changestatus?statusid=' + statusId, {})
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
             	return {
             		getIssuesByProject: getIssuesByProject,
-                    getMyIssues: getMyIssues
+                    getMyIssues: getMyIssues,
+                    getIssueById: getIssueById,
+                    changeIssueStatus: changeIssueStatus
             	}
             }
 		])

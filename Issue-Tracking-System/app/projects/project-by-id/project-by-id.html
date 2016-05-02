@@ -4,8 +4,8 @@
 		<legend>
 			Project Key: {{project.ProjectKey}}
 			<br>
-			<button class="btn btn-success" ng-click="loadEditProcect(project.Id)">Edit</button>
-			<button class="btn btn-success" ng-click="loadAddProject()">Add issue</button>
+			<button class="btn btn-success" ng-click="loadEditProject(project.Id)">Edit</button>
+			<button class="btn btn-success" ng-click="loadAddIssue(project.Id)">Add issue</button>
 		</legend>
 		<fieldset>
 			<div class="form-group-sm">
@@ -52,7 +52,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="issue in issuesPerPage">
-				<td class="col-md-2"><a class="btn btn-link permalink-section" ng-click="">{{issue.Title}}</a></td>
+				<td class="col-md-2"><a class="btn btn-link permalink-section" ng-click="loadIssueById(issue.Id)">{{issue.Title}}</a></td>
 				<td class="col-md-5">{{issue.Description}}</td>
 				<td class="col-md-3">{{issue.DueDate}}</td>
 				<td class="col-md-2">{{issue.Assignee.Username}}</td>

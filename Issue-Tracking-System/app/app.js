@@ -12,8 +12,11 @@
 	  'issueTrackingSystem.common',
 	  'issueTrackingSystem.projects.create',
 	  'issueTrackingSystem.projects',
+	  'issueTrackingSystem.projects.byId',
 	  'issueTrackingSystem.projects.edit',
-	  'issueTrackingSystem.issues.read'
+	  'issueTrackingSystem.issues.my',
+	  'issueTrackingSystem.issues.add',
+	  'issueTrackingSystem.issues.byId'
 	])
 	.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 		$routeProvider.otherwise({redirectTo: '/'});

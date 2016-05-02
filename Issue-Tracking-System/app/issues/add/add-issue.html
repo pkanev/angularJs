@@ -1,0 +1,56 @@
+<div class="row">
+	<h3>Add issue</h3>
+	<form name="addIssueForm" class="form-inline">
+		<legend>
+			<button class="btn btn-success" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)">Add!</button>
+		</legend>
+		<fieldset class="col-sm-12">
+			<div class="form-group-sm">
+				<label for="title" class="col-sm-5 control-label">Title</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" required="required" ng-model="issue.Title" id="title" />
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="description" class="col-sm-5 control-label">Description</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" required="required" ng-model="issue.Description" id="description" />
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="projectId" class="col-sm-5 control-label">Project: {{issue.Project.Title}}</label>
+				<div class="col-sm-7">
+					<select id="projectId" class="form-control" ng-model="issue.ProjectId" ng-options="project.Id as Project.Title for project in projects">
+					</select>
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="dueDate" class="col-sm-5 control-label">Due date:</label>
+				<div class="col-sm-7">
+					<input type="date" class="form-control" required="required" ng-model="issue.DueDate" id="dueDate" />
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="assignee" class="col-sm-5 control-label">Assignee (current Id: {{issue.AssigneeId}})</label>
+				<div class="col-sm-7">
+					<select id="assignee" class="form-control" ng-model="issue.AssigneeId" ng-options="user.Id as user.Username for user in users">
+					</select>
+				</div>
+			</div>
+			<div class="form-group-sm">
+				<label for="priority" class="col-sm-5 control-label">Priority</label>
+				<div class="col-sm-7">
+					<select id="priority" class="form-control" ng-model="issue.PriorityId" ng-options="priority.Id as priority.Name for priority in project.Priorities">
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="col-sm-12">
+			<h7>Labels:</h7>
+			<div ng-repeat="label in issue.Labels" class="col-sm-12 control-label"><input type="text" class="form-control" required="required" ng-model="label.Name" /></div>
+			<div ng-if="issue.Labels.length == 0">No labels were found</div>
+			<button class="btn btn-success btn-sm" ng-click="addNewLabel()">Add label</button>
+			<button class="btn btn-danger btn-sm" ng-click="removeLabel()">Remove label</button>
+		</fieldset>
+	</form>
+</div>
