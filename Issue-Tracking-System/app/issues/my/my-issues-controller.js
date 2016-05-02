@@ -38,8 +38,8 @@
 		        	$location.path(path);
 		        }
 
-		        $scope.loadProjectIssues = function(projectId) {
-		        	var path = '/projects/' + projectId + '/Issues/';
+		        $scope.loadProjectByIssue = function(projectId) {
+		        	var path = '/projects/' + projectId;
 		        	$location.path(path);
 		        }
 			}

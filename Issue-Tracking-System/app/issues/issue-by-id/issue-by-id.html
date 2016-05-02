@@ -1,6 +1,6 @@
 <div class="row">
 	<h3>Issue</h3>
-	<form name="projectForm" class="form-inline">
+	<form class="form-inline">
 		<legend>
 			Issue Key: {{issue.IssueKey}}
 			<br>
@@ -48,7 +48,7 @@
 		<span ng-if="project.Labels.length == 0">No labels were found</span>
 	</p>
 </div>
-<div ng-if="isAssignee || isAdmin" class="row">
+<div ng-if="isAssignee || isLead || isAdmin" class="row">
 	<h3>Available statuses</h3>
 	<p>
 		<span ng-repeat="status in issue.AvailableStatuses"><button ng-click="changeIssueStatus(issue.Id, status)" class="btn btn-info btn-sm">{{status.Name}}</button> </span>

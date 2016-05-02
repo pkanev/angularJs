@@ -1,0 +1,59 @@
+<div class="row">
+	<h3>Issue</h3>
+	<form name="editIssueForm" class="form-inline">
+		<legend>
+			Issue Key: {{issue.IssueKey}}
+			<br>
+			<button ng-if="isLead || isAdmin" class="btn btn-success" ng-disabled="editIssueForm.$invalid" ng-click="EditIssue(issue.Id)">Edit</button>
+		</legend>
+		<fieldset>
+			<div class="form-group-sm col-sm-12">
+				<label for="title" class="col-sm-5 control-label">Name</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" required="required" ng-model="issue.Title" id="title" />
+				</div>
+			</div>
+			<div class="form-group-sm col-sm-12">
+				<label for="description" class="col-sm-5 control-label">Description</label>
+				<div class="col-sm-7">
+					<textarea type="text" class="form-control" required="required" ng-model="issue.Description" id="description"></textarea>
+				</div>
+			</div>
+			<div class="form-group-sm col-sm-12">
+				<label for="assigneeId" class="col-sm-5 control-label">Assignee (current Id: {{issue.AssigneeId}})</label>
+				<div class="col-sm-7">
+					<select id="assigneeId" class="form-control" ng-model="issue.AssigneeId" ng-options="user.Id as user.Username for user in users | orderBy : 'Username'">
+					</select>
+				</div>
+			</div>
+			<div class="form-group-sm col-sm-12">
+				<label for="priorityId" class="col-sm-5 control-label">Priority</label>
+				<div class="col-sm-7">
+					<select id="priorityId" class="form-control" ng-model="issue.PriorityId" ng-options="priority.Id as priority.Name for priority in currentProject.Priorities">
+					</select>
+				</div>
+			</div>
+			<div class="form-group-sm col-sm-12">
+				<label for="dueDate" class="col-sm-5 control-label">Due Date</label>
+				<div class="col-sm-7">
+					<input type="date" class="form-control" required="required" ng-model="issue.DueDate" id="dueDate" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<p>Author: {{issue.Author.Username}}</p>
+	<p>Project: {{issue.Project.Name}}</p>
+	<p>Status: {{issue.Status.Name}}</p>
+	<p>
+		<strong >Labels: </strong>
+		<span ng-repeat="label in issue.Labels"><button class="btn btn-info btn-sm">{{label.Name}}</button> </span>
+		<span ng-if="project.Labels.length == 0">No labels were found</span>
+	</p>
+</div>
+<div class="row">
+	<h3>Available statuses</h3>
+	<p>
+		<span ng-repeat="status in issue.AvailableStatuses"><button ng-click="changeIssueStatus(issue.Id, status)" class="btn btn-info btn-sm">{{status.Name}}</button> </span>
+		<span ng-if="issue.AvailableStatuses.length == 0">The issue is closed!</span>
+	</p>
+</div>

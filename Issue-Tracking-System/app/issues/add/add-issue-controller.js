@@ -2,22 +2,23 @@
 	'use strict';
 	angular.module('issueTrackingSystem.issues.add', [])
 		.config(['$routeProvider', function($routeProvider){
-			$routeProvider.when('/issues/add', {
+			$routeProvider.when('/issues/add-issue', {
 				templateUrl: 'app/issues/add/add-issue.html',
 				controller: 'AddIssueCtrl',
 				access: {
-					isAdmin: true
+					isAuthenticated: true
 				}
 			});
-			$routeProvider.when('/projects/:id/issues/add', {
+			$routeProvider.when('/projects/:id/issues/add-issue', {
 				templateUrl: 'app/issues/add/add-issue.html',
 				controller: 'AddIssueCtrl',
 				access: {
-					isAdmin: true
+					isAuthenticated: true
 				}
 			});
 		}])
 		.controller('AddIssueCtrl', [
+			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
@@ -25,7 +26,7 @@
 			'issueServices',
 			'userServices',
 			'toastr',
-			function($scope, $routeParams, $location, projectServices, issueServices, userServices, toastr) {
+			function($rootScope, $scope, $routeParams, $location, projectServices, issueServices, userServices, toastr) {
 
 				$scope.issue = {
 					Labels: []
@@ -46,6 +47,12 @@
 								.then(function(returnedProject) {
 									$scope.issue.ProjectId = returnedProject.Id;
 									$scope.currentProject = returnedProject;
+
+									if(returnedProject.Lead.Id === $rootScope.currentUser.Id) {
+										$scope.isLead = true;
+									}
+							
+									$scope.isAdmin = $rootScope.currentUser.isAdmin;
 								})
 						}
 					});
@@ -54,6 +61,14 @@
 					projectServices.getProjectById(projectId)
 						.then(function(returnedProject) {
 							$scope.currentProject = returnedProject;
+
+							if(returnedProject.Lead.Id === $rootScope.currentUser.Id) {
+								$scope.isLead = true;
+							} else {
+								$scope.isLead = false;
+							}
+							
+							$scope.isAdmin = $rootScope.currentUser.isAdmin;
 						})
 				}
 

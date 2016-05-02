@@ -16,18 +16,19 @@
 				templateUrl: 'app/projects/project-by-id/project-by-id.html',
 				controller: 'ProjectByIdCtrl',
 				access: {
-					isAdminOrLead: true
+					isAuthenticated: true
 				}
 			});
 		}])
 		.controller('ProjectByIdCtrl', [
+			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
 			'projectServices',
 			'issueServices',
 			'PAGE_SIZE',
-			function($scope, $routeParams, $location, projectServices, issueServices, PAGE_SIZE) {
+			function($rootScope, $scope, $routeParams, $location, projectServices, issueServices, PAGE_SIZE) {
 				$scope.issueParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
@@ -36,6 +37,12 @@
 				projectServices.getProjectById($routeParams.id)
 					.then(function(project) {
 						$scope.project = project;
+
+						if(project.Lead.Id === $rootScope.currentUser.Id) {
+							$scope.isLead = true;
+						}
+				
+						$scope.isAdmin = $rootScope.currentUser.isAdmin;
 					});
 					
 				issueServices.getIssuesByProject($routeParams.id)
@@ -51,7 +58,7 @@
 				}
 
 				$scope.loadAddIssue = function(projectId) {
-					var path = 'projects/' + projectId + '/issues/add';
+					var path = 'projects/' + projectId + '/issues/add-issue';
 					$location.path(path);	
 				}
 

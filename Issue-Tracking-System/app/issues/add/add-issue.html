@@ -2,7 +2,7 @@
 	<h3>Add issue</h3>
 	<form name="addIssueForm" class="form-inline">
 		<legend>
-			<button class="btn btn-success" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)">Add!</button>
+			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)">Add!</button>
 		</legend>
 		<fieldset class="col-sm-12">
 			<div class="form-group-sm col-sm-12">

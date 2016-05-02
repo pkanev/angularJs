@@ -4,8 +4,8 @@
 		<legend>
 			Project Key: {{project.ProjectKey}}
 			<br>
-			<button class="btn btn-success" ng-click="loadEditProject(project.Id)">Edit</button>
-			<button class="btn btn-success" ng-click="loadAddIssue(project.Id)">Add issue</button>
+			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-click="loadEditProject(project.Id)">Edit</button>
+			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-click="loadAddIssue(project.Id)">Add issue</button>
 		</legend>
 		<fieldset>
 			<div class="form-group-sm">

@@ -15,7 +15,7 @@
 		<tbody>
 			<tr ng-repeat="issue in issuesPerPage">
 				<td><a ng-click="loadIssueById(issue.Id)", class="btn btn-link">{{issue.Title}}</a></td>
-				<td><a ng-click="loadProjectIssues(issue.Project.Id)", class="btn btn-link">{{issue.Project.Name}}</a></td>
+				<td><a ng-click="loadProjectByIssue(issue.Project.Id)", class="btn btn-link">{{issue.Project.Name}}</a></td>
 				<td>{{issue.DueDate}}</td>
 			</tr>
 		</tbody>

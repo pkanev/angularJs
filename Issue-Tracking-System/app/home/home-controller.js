@@ -55,7 +55,7 @@
 				}
 
 				$scope.addIssue = function() {
-					$location.path('/issues/add');	
+					$location.path('/issues/add-issue');	
 				}
 			}
 		])
