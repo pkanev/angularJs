@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('issueTrackingSystem.projects.create', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
+	angular.module('issueTrackingSystem.projects.add', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			// var routeChecks = {
 			// 	isAdmin: ['$q', 'identity', function($q, identity) {
@@ -13,7 +13,7 @@
 			// };
 
 			$routeProvider.when('/projects/add', {
-				templateUrl: 'app/projects/create/create-project.html',
+				templateUrl: 'app/projects/add/add-project.html',
 				controller: 'CreateProjectCtrl',
 				access: {
 					isAdmin: true

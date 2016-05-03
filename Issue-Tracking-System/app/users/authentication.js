@@ -24,7 +24,10 @@
 					$http(req)
 						.then(function(response) {
 							//should automatically login user
-							deferred.resolve(identity.getToken(user));
+							identity.getToken(user)
+								.then(function(token) {
+									deferred.resolve(token);
+								})
 						});
 						
 					return deferred.promise;
@@ -45,6 +48,7 @@
 					identity.removeToken();
 					identity.clearHeaders();
 					identity.removeUserProfile();
+					sessionStorage.clear();
 					$location.path('/');
 				}
 

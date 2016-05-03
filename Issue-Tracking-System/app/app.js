@@ -10,7 +10,7 @@
 	  'issueTrackingSystem.home',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.common',
-	  'issueTrackingSystem.projects.create',
+	  'issueTrackingSystem.projects.add',
 	  'issueTrackingSystem.projects',
 	  'issueTrackingSystem.projects.byId',
 	  'issueTrackingSystem.projects.edit',

@@ -24,11 +24,12 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="isAuthenticated">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.Username}}<span class="caret"></span></a>
-         <!--  <ul class="dropdown-menu">
-            <li><a href="#/profile/password">Change Password</a></li>
-            <li ng-if="isAdmin"><a href="#/admin">Admin</a></li>
-            <li><a href="#/profile" ng-click="logout()">Logout</a></li>
-          </ul> -->
+          <ul class="dropdown-menu">
+            <!-- <li ng-if="isAdmin"><a href="#/admin">Admin</a></li> -->
+            <li><a href="#/settings">Settings</a></li>
+            <li><a href="#/changePassword">Change Password</a></li>
+            <li><a href="#/logout" ng-click="logout()">Logout</a></li>
+          </ul>
         </li>
       </ul>
 

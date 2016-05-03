@@ -3,7 +3,7 @@
 	angular.module('issueTrackingSystem.projects.edit', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
 		.config(['$routeProvider', function($routeProvider) {
 			$routeProvider.when('/projects/:id/edit', {
-				templateUrl: 'app/projects/update/edit-project.html',
+				templateUrl: 'app/projects/edit/edit-project.html',
 				controller: 'EditProjectCtrl',
 				access: {
 					isAdminOrLead: true
