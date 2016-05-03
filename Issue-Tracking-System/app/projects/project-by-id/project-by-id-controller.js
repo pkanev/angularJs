@@ -21,14 +21,13 @@
 			});
 		}])
 		.controller('ProjectByIdCtrl', [
-			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
 			'projectServices',
 			'issueServices',
 			'PAGE_SIZE',
-			function($rootScope, $scope, $routeParams, $location, projectServices, issueServices, PAGE_SIZE) {
+			function($scope, $routeParams, $location, projectServices, issueServices, PAGE_SIZE) {
 				$scope.issueParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
@@ -38,11 +37,11 @@
 					.then(function(project) {
 						$scope.project = project;
 
-						if(project.Lead.Id === $rootScope.currentUser.Id) {
+						if(project.Lead.Id === sessionStorage.id) {
 							$scope.isLead = true;
 						}
 				
-						$scope.isAdmin = $rootScope.currentUser.isAdmin;
+						$scope.isAdmin = sessionStorage.hasAdminRights;
 					});
 					
 				issueServices.getIssuesByProject($routeParams.id)

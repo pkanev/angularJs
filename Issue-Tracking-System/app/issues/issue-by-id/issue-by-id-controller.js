@@ -11,22 +11,21 @@
 			})
 		}])
 		.controller('IssueByIdCtrl', [
-			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
 			'issueServices',
-			function($rootScope, $scope, $routeParams, $location, issueServices) {
+			function($scope, $routeParams, $location, issueServices) {
 				issueServices.getIssueById($routeParams.id)
 					.then(function(currentIssue) {
 						$scope.issue = currentIssue;
-						if(currentIssue.Author.Id === $rootScope.currentUser.Id) {
+						if(currentIssue.Author.Id === sessionStorage.id) {
 							$scope.isLead = true;
 						}
-						if(currentIssue.Assignee.Id === $rootScope.currentUser.Id) {
+						if(currentIssue.Assignee.Id === sessionStorage.id) {
 							$scope.isAssignee = true;
 						}
-						$scope.isAdmin = $rootScope.currentUser.isAdmin;
+						$scope.isAdmin = sessionStorage.hasAdminRights;
 					})
 
 				$scope.changeIssueStatus = function(issueId, newStatus) {

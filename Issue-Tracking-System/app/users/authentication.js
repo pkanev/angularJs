@@ -37,8 +37,8 @@
 					var deferred = $q.defer();
 
 					identity.getToken(user)
-						.then(function(response) {
-							deferred.resolve(response);
+						.then(function(token) {
+							deferred.resolve(token);
 						});
 
 					return deferred.promise;
@@ -48,7 +48,6 @@
 					identity.removeToken();
 					identity.clearHeaders();
 					identity.removeUserProfile();
-					sessionStorage.clear();
 					$location.path('/');
 				}
 

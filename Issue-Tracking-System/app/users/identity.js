@@ -9,9 +9,9 @@
 			'projectServices',
 			'BASE_URL',
 			function($http, $q, $httpParamSerializerJQLike, $routeParams, ipCookie, projectServices, BASE_URL) {
-				var deferred = $q.defer(),
-					currentUser = undefined,
-					AUTHENTICATION_COOKIE_KEY = '!__Authentication_Cookie_Key__!';
+				var deferred = $q.defer();
+				var currentUser = undefined;
+				var AUTHENTICATION_COOKIE_KEY = '!__Authentication_Cookie_Key__!';
 
 				function preserveUserData(data) {
 					var accessToken = data.access_token;
@@ -20,6 +20,14 @@
 					$http.defaults.headers.common.Authorization = tokenType + ' ' + accessToken;
 					ipCookie(AUTHENTICATION_COOKIE_KEY, accessToken, {
 						expires: daysToExpire});
+				}
+
+				function createSessionStorage(data) {
+					sessionStorage['username'] = data.Username;
+					sessionStorage['id'] = data.Id;
+					if(data.isAdmin) {
+						sessionStorage['hasAdminRights'] = true;
+					}
 				}
 
 				function getCurrentUser() {
@@ -47,7 +55,7 @@
 					$http(req)
 						.then(function(response) {
 							preserveUserData(response.data);
-							
+
 							requestUserProfile()
 								.then(function() {
 									deferred.resolve(response.data);
@@ -79,6 +87,7 @@
 					$http.get(BASE_URL + 'users/me')
 						.then(function(response) {
 							currentUser = response.data;
+							createSessionStorage(response.data);
 							deferred.resolve(currentUser);
 							userProfileDeferred.resolve();
 						});
@@ -88,6 +97,7 @@
 
 				function removeUserProfile() {
 					currentUser = undefined;
+					sessionStorage.clear();
 				}
 
 				function isAuthenticated() {

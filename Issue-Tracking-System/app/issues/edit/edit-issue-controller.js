@@ -11,14 +11,13 @@
 			})
 		}])
 		.controller('EditIssueCtrl', [
-			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
 			'issueServices',
 			'projectServices',
 			'userServices',
-			function($rootScope, $scope, $routeParams, $location, issueServices, projectServices, userServices) {
+			function($scope, $routeParams, $location, issueServices, projectServices, userServices) {
 				userServices.getAllUsers()
 					.then(function(users) {
 						$scope.users = users;
@@ -27,7 +26,6 @@
 				issueServices.getIssueById($routeParams.id)
 					.then(function(currentIssue) {
 						$scope.issue = currentIssue;
-						console.log(currentIssue.Id);
 						$scope.issue.AssigneeId = currentIssue.Assignee.Id;
 
 						var year = parseInt(currentIssue.DueDate.slice(0, 4));
@@ -37,10 +35,10 @@
 
 						$scope.issue.DueDate = date;
 
-						if(currentIssue.Author.Id === $rootScope.currentUser.Id) {
+						if(currentIssue.Author.Id === sessionStorage.id) {
 							$scope.isLead = true;
 						}
-						$scope.isAdmin = $rootScope.currentUser.isAdmin;
+						$scope.isAdmin = sessionStorage.hasAdminRights;
 
 						projectServices.getProjectById(currentIssue.Project.Id)
 								.then(function(returnedProject) {
@@ -60,7 +58,6 @@
 				$scope.editIssue = function(issueId) {
 					issueServices.editIssue($scope.issue)
 						.then(function(editedIssue) {
-							console.log(editedIssue);
 							toastr.success('Issue edited successfully');
 							var path = 'issues/' + editedIssue.Id;
 							$location.path(path);

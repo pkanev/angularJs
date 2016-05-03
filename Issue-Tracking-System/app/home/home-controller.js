@@ -8,25 +8,24 @@
 			});
 		}])
 		.controller('HomeCtrl', [
-			'$rootScope',
 			'$scope',
 			'$location',
 			'authentication',
 			'identity',
 			'toastr',
-			function($rootScope, $scope, $location, authentication, identity, toastr) {
+			function($scope, $location, authentication, identity, toastr) {
 
-				$rootScope.isAuthenticated = identity.isAuthenticated();
-				$rootScope.isAdmin = identity.isAdmin();
-				$rootScope.currentUser = identity.getCurrentUser();
+				$scope.isAuthenticated = identity.isAuthenticated();
+				$scope.isAdmin = identity.isAdmin();
+				$scope.currentUser = identity.getCurrentUser();
 
 				$scope.login = function(user) {
 					authentication.loginUser(user)
 						.then(function(loggedInUser) {
 							toastr.info('Welcome, ' + loggedInUser.userName);
-							$rootScope.currentUser = loggedInUser;
-							$rootScope.isAuthenticated = identity.isAuthenticated();
-							$rootScope.isAdmin = identity.isAdmin();
+							$scope.currentUser = loggedInUser;
+							$scope.isAuthenticated = identity.isAuthenticated();
+							$scope.isAdmin = identity.isAdmin();
 							$location.path('/');
 						})
 				};
@@ -35,9 +34,9 @@
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
 						toastr.info('Successful registration');
-						$rootScope.currentUser = registeredUser;
-						$rootScope.isAuthenticated = identity.isAuthenticated();
-						$rootScope.isAdmin = identity.isAdmin();
+						$scope.currentUser = registeredUser;
+						$scope.isAuthenticated = identity.isAuthenticated();
+						$scope.isAdmin = identity.isAdmin();
 						$location.path('/');
 					});
 				};

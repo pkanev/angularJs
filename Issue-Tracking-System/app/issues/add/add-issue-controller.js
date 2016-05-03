@@ -18,7 +18,6 @@
 			});
 		}])
 		.controller('AddIssueCtrl', [
-			'$rootScope',
 			'$scope',
 			'$routeParams',
 			'$location',
@@ -26,7 +25,7 @@
 			'issueServices',
 			'userServices',
 			'toastr',
-			function($rootScope, $scope, $routeParams, $location, projectServices, issueServices, userServices, toastr) {
+			function($scope, $routeParams, $location, projectServices, issueServices, userServices, toastr) {
 
 				$scope.issue = {
 					Labels: []
@@ -48,11 +47,11 @@
 									$scope.issue.ProjectId = returnedProject.Id;
 									$scope.currentProject = returnedProject;
 
-									if(returnedProject.Lead.Id === $rootScope.currentUser.Id) {
+									if(returnedProject.Lead.Id === sessionStorage.id) {
 										$scope.isLead = true;
 									}
 							
-									$scope.isAdmin = $rootScope.currentUser.isAdmin;
+									$scope.isAdmin = sessionStorage.hasAdminRights;
 								})
 						}
 					});
@@ -62,13 +61,13 @@
 						.then(function(returnedProject) {
 							$scope.currentProject = returnedProject;
 
-							if(returnedProject.Lead.Id === $rootScope.currentUser.Id) {
+							if(returnedProject.Lead.Id === sessionStorage.id) {
 								$scope.isLead = true;
 							} else {
 								$scope.isLead = false;
 							}
 							
-							$scope.isAdmin = $rootScope.currentUser.isAdmin;
+							$scope.isAdmin = sessionStorage.hasAdminRights;
 						})
 				}
 
