@@ -27,6 +27,7 @@
 				issueServices.getIssueById($routeParams.id)
 					.then(function(currentIssue) {
 						$scope.issue = currentIssue;
+						console.log(currentIssue.Id);
 						$scope.issue.AssigneeId = currentIssue.Assignee.Id;
 
 						var year = parseInt(currentIssue.DueDate.slice(0, 4));
@@ -57,8 +58,9 @@
 				};
 
 				$scope.editIssue = function(issueId) {
-					issueServices.editIssue(issueId)
+					issueServices.editIssue($scope.issue)
 						.then(function(editedIssue) {
+							console.log(editedIssue);
 							toastr.success('Issue edited successfully');
 							var path = 'issues/' + editedIssue.Id;
 							$location.path(path);
