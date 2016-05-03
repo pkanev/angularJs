@@ -46,7 +46,7 @@
 									$scope.currentProject = returnedProject;
 									$scope.issue.PriorityId = currentIssue.Priority.Id;
 								})
-					})
+					});
 
 				$scope.changeIssueStatus = function(issueId, newStatus) {
 					issueServices.changeIssueStatus(issueId, newStatus.Id)
@@ -54,9 +54,16 @@
 							$scope.issue.Status = newStatus;
 							$scope.issue.AvailableStatuses = returnedStatuses;
 						})
-				}
+				};
 
-
+				$scope.editIssue = function(issueId) {
+					issueServices.editIssue(issueId)
+						.then(function(editedIssue) {
+							toastr.success('Issue edited successfully');
+							var path = 'issues/' + editedIssue.Id;
+							$location.path(path);
+						})
+				};
 			}
 		]);
 })();

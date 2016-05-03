@@ -87,6 +87,7 @@
 				$scope.addIssue = function(issue) {
 					issueServices.addIssue(issue)
 						.then(function(createdIssue) {
+							toastr.success('Issue created successfully');
 							var path = 'issues/' + createdIssue.Id;
 							$location.path(path);
 						})

@@ -70,6 +70,7 @@
 				$scope.createProject = function(project) {
 					projectServices.createProject(project)
 						.then(function(createdProject) {
+							toastr.success(createProject.Name + ' was created successfully');
 							var path = '/projects/' + createdProject.Id;
 							$location.path(path);
 						})
