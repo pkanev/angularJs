@@ -26,7 +26,7 @@
 							$scope.currentUser = loggedInUser;
 							$scope.isAuthenticated = identity.isAuthenticated();
 							$scope.isAdmin = identity.isAdmin();
-							$location.path('/');
+							$location.path('/fakepath');
 						})
 				};
 
@@ -37,7 +37,7 @@
 						$scope.currentUser = registeredUser;
 						$scope.isAuthenticated = identity.isAuthenticated();
 						$scope.isAdmin = identity.isAdmin();
-						$location.path('/');
+						$location.path('/fakepath');
 					});
 				};
 

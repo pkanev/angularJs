@@ -8,12 +8,14 @@
 			'identity',
 			'toastr',
 			function($scope, $http, authentication, identity, toastr) {
-				identity.getCurrentUser()
-					.then(function(user) {
-						$scope.currentUser = user;
-						$scope.isAuthenticated = identity.isAuthenticated();
-						$scope.isAdmin = user.isAdmin;
-					})
+				$scope.$on('$locationChangeStart', function(event) {
+					identity.getCurrentUser()
+						.then(function(user) {
+							$scope.currentUser = user;
+							$scope.isAuthenticated = identity.isAuthenticated();
+							$scope.isAdmin = user.isAdmin;
+						})					
+				});
 
 				$scope.logout = function() {
 					authentication.logout();
