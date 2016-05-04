@@ -10,23 +10,26 @@
     </div>
     <div ng-if="isAuthenticated" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="#/settings">Settings</a>              
-        </li>
-        <li>
-          <a href="#/changePassword">Change Password</a>              
-        </li>
-        <li>
-          <a href="#/logout" ng-click="logout()">Logout</a>
-        </li>
+		<li>
+			<a href="#/">Dashboard</a>
+		</li>
+		<li>
+			<a href="#/issues/me">My issues</a>
+		</li>
+		<li ng-if="isAdmin">
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+	            <li><a href="#/projects">Projects</a></li>
+	            <li><a href="#/projects/add">Create a project!</a></li>
+	            <li><a href="#/issues/add-issue">Add issue!</a></li>
+          </ul>
+		</li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="isAuthenticated">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.Username}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <!-- <li ng-if="isAdmin"><a href="#/admin">Admin</a></li> -->
-            <li><a href="#/settings">Settings</a></li>
             <li><a href="#/changePassword">Change Password</a></li>
             <li><a href="#/logout" ng-click="logout()">Logout</a></li>
           </ul>

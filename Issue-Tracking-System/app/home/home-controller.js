@@ -17,7 +17,10 @@
 
 				$scope.isAuthenticated = identity.isAuthenticated();
 				$scope.isAdmin = identity.isAdmin();
-				$scope.currentUser = identity.getCurrentUser();
+				identity.getCurrentUser()
+					.then(function(user) {
+						$scope.currentUser = user;
+					});
 
 				$scope.login = function(user) {
 					authentication.loginUser(user)
