@@ -11,8 +11,8 @@
 			'BASE_URL',
 			function($http, $q, $httpParamSerializerJQLike, $location, identity, BASE_URL) {
 				function registerUser(user) {
-					var deferred = $q.defer(),
-						req = {
+					var deferred = $q.defer();
+					var req = {
 							method: 'POST',
 						    url: BASE_URL + 'api/Account/Register',
 						    data: $httpParamSerializerJQLike(user),
@@ -24,7 +24,11 @@
 					$http(req)
 						.then(function(response) {
 							//should automatically login user
-							identity.getToken(user)
+						var userToLogin = {
+							Username: user.email,
+							Password: user.password
+						};
+							identity.getToken(userToLogin)
 								.then(function(token) {
 									deferred.resolve(token);
 								})

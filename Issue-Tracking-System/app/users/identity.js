@@ -39,11 +39,10 @@
 				}
 
 				function getToken(user) {
-					var deferred = $q.defer(),
-						req;
+					var deferred = $q.defer();
 
 					user.grant_type='password';
-					req = {
+					var req = {
 						method: 'POST',
 					    url: BASE_URL + 'api/Token',
 					    data: $httpParamSerializerJQLike(user),
