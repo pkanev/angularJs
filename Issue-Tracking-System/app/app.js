@@ -9,6 +9,7 @@
 	  'ipCookie',
 	  'issueTrackingSystem.home',
 	  'issueTrackingSystem.users.identity',
+	  'issueTrackingSystem.users',
 	  'issueTrackingSystem.common',
 	  'issueTrackingSystem.projects.add',
 	  'issueTrackingSystem.projects',
