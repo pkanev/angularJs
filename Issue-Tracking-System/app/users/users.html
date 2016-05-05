@@ -1,7 +1,7 @@
 <div class="row">
 <form class="form-horizontal">
 	<label for="filter">Search users</label>
-	<input id="filter" ng-model="selectedUsers" class="form-control" />
+	<input id="filter" ng-model="filterCriteria" class="form-control" />
 </form>
 	<table class="table table-striped table-hover ">
 		<thead>
@@ -11,11 +11,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="user in users | filter : selectedUsers | orderBy: 'Username'">
+			<tr ng-repeat="user in usersPerPage">
 				<td >{{user.Username}}</td>
 				<td ng-if="user.isAdmin">Administrator</td>
 				<td ng-if="!user.isAdmin"><a ng-click="makeAdmin()" class="btn btn-info btn-sm">Make admin!</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<pagination total-items="totalUsers" ng-model="userParams.pageNumber" items-per-page="userParams.pageSize" ng-change="loadPagination()" max-size="9" boundary-links="true"></pagination>
+	<div ng-if="filteredUsers.length == 0">No users were found.</div>
+	</div>
 </div>

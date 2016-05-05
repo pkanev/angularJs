@@ -12,13 +12,40 @@
 		}])
 		.controller('UsersCtrl', [
 			'$scope',
-			'$location',
+			'$filter',
 			'userServices',
-			function($scope, $location, userServices) {
+			'PAGE_SIZE',
+			function($scope, $filter, userServices, PAGE_SIZE) {
+				$scope.userParams = {
+		        	'pageNumber' : 1,
+					'pageSize' : PAGE_SIZE,
+		        };
+				// $scope.filteredUsers = [];
+				$scope.users = [];
+
 				userServices.getAllUsers()
 					.then(function(returnedUsers) {
 						$scope.users = returnedUsers;
-					})
+						$scope.filteredUsers = $filter('orderBy')($scope.users, 'Username');
+						$scope.loadPagination();
+					});
+
+				$scope.$watch('filterCriteria', function(newVal, oldVal) {
+					if(newVal) {
+						$scope.filteredUsers = $filter('filter')($scope.users, newVal);
+						$scope.filteredUsers = $filter('orderBy')($scope.filteredUsers, 'Username');
+					} else {
+						$scope.filteredUsers = $filter('orderBy')($scope.users, 'Username');
+					}
+					$scope.loadPagination();
+				});
+
+				$scope.loadPagination = function() {
+            		$scope.totalUsers = $scope.filteredUsers.length;
+                    var start = ($scope.userParams['pageNumber'] - 1) * $scope.userParams['pageSize'];
+                    var end = start + $scope.userParams['pageSize'];
+            		$scope.usersPerPage = $scope.filteredUsers.slice(start, end);
+		        };
 			}
 		]);
 })();
