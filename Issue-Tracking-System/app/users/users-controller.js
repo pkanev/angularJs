@@ -6,7 +6,7 @@
 				templateUrl: 'app/users/users.html',
 				controller: 'UsersCtrl',
 				access: {
-					isAuthenticated: true
+					isAdmin: true
 				}
 			});
 		}])
@@ -46,6 +46,17 @@
                     var end = start + $scope.userParams['pageSize'];
             		$scope.usersPerPage = $scope.filteredUsers.slice(start, end);
 		        };
+
+		        $scope.makeAdmin = function(user) {
+		        	var data = {
+		        		UserId: user.Id
+		        	};
+
+		        	userServices.makeAdmin(data)
+		        		.then(function(success) {
+		        			user.isAdmin = true;
+		        		})
+		        }
 			}
 		]);
 })();

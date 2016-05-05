@@ -28,17 +28,6 @@
                     return deferred.promise;
                 }
                 
-                // function getIssuesByProject(projectId) {
-                //     var deferred = $q.defer();
-
-                //     $http.get(BASE_URL + 'projects/' + projectId + '/issues')
-                //         .then(function(response) {
-                //             deferred.resolve(response.data);
-                //         });
-
-                //     return deferred.promise;
-                // }
-
                 function editProject(id, projectData) {
                     var deferred = $q.defer();
                     $http.put(BASE_URL + 'projects/' + id, projectData)

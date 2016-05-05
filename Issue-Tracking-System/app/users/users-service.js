@@ -17,8 +17,20 @@
 					return deferred.promise;
 				}
 
+				function makeAdmin(userId) {
+					var deferred = $q.defer();
+
+					$http.put(BASE_URL + 'users/makeadmin', userId)
+						.then(function(response) {
+							deferred.resolve(response);
+						});
+
+					return deferred.promise;
+				}
+
 				return {
 					getAllUsers: getAllUsers,
+					makeAdmin: makeAdmin
 				}
 			}
 		]);

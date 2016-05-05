@@ -14,7 +14,7 @@
 			<tr ng-repeat="user in usersPerPage">
 				<td >{{user.Username}}</td>
 				<td ng-if="user.isAdmin">Administrator</td>
-				<td ng-if="!user.isAdmin"><a ng-click="makeAdmin()" class="btn btn-info btn-sm">Make admin!</a></td>
+				<td ng-if="!user.isAdmin"><a ng-click="makeAdmin(user)" class="btn btn-info btn-sm">Make admin!</a></td>
 			</tr>
 		</tbody>
 	</table>
