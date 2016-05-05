@@ -52,7 +52,6 @@
 
                 function editIssue(issue) {
                     var deferred = $q.defer();
-
                     $http.put(BASE_URL + 'issues/' + issue.Id, issue)
                         .then(function(response) {
                             deferred.resolve(response.data);

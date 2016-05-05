@@ -28,12 +28,7 @@
 						$scope.issue = currentIssue;
 						$scope.issue.AssigneeId = currentIssue.Assignee.Id;
 
-						var year = parseInt(currentIssue.DueDate.slice(0, 4));
-						var month = parseInt(currentIssue.DueDate.slice(5, 7));
-						var day = parseInt(currentIssue.DueDate.slice(8, 10));
-						var date = new Date(year, month, day);
-
-						$scope.issue.DueDate = date;
+						$scope.issue.DueDate = new Date(currentIssue.DueDate);
 
 						if(currentIssue.Author.Id === sessionStorage.id) {
 							$scope.isLead = true;
