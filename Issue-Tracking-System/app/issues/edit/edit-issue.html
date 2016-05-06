@@ -4,6 +4,7 @@
 		<legend>
 			Issue Key: {{issue.IssueKey}}
 			<br>
+			<a ng-href="#/issues/{{issue.Id}}" class="btn btn-primary">Cancel</a>
 			<button ng-if="isLead || isAdmin" class="btn btn-success" ng-disabled="editIssueForm.$invalid" ng-click="editIssue(issue.Id)">Edit</button>
 		</legend>
 		<fieldset>

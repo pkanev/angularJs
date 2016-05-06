@@ -4,6 +4,7 @@
 		<legend>
 			Issue Key: {{issue.IssueKey}}
 			<br>
+			<a ng-href="#/projects/{{issue.Project.Id}}" class="btn btn-success">To project</a>
 			<a ng-if="isLead || isAdmin" ng-href="#/issues/{{issue.Id}}/edit/" class="btn btn-success">Edit</a>
 		</legend>
 		<fieldset>

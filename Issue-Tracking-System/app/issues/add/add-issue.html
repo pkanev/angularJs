@@ -2,6 +2,8 @@
 	<h3>Add issue</h3>
 	<form name="addIssueForm" class="form-inline">
 		<legend>
+			<a ng-if="currentProject" ng-href="#projects/{{currentProject.Id}}" class="btn btn-primary">Cancel</a>
+			<a ng-if="!currentProject" ng-href="#/" class="btn btn-primary">Cancel</a>
 			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)">Add!</button>
 		</legend>
 		<fieldset class="col-sm-12">

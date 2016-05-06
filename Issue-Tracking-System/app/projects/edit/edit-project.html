@@ -4,6 +4,7 @@
 		<legend>
 			Project Key: {{project.ProjectKey}}
 			<br>
+			<a href="#/projects/{{project.Id}}" class="btn btn-primary">Cancel</a>
 			<button class="btn btn-success" ng-disabled="editProjectForm.$invalid" ng-click="editProject(project)">Edit!</button>
 		</legend>
 		<fieldset class="col-sm-12">
