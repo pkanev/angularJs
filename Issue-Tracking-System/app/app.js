@@ -18,7 +18,8 @@
 	  'issueTrackingSystem.issues.my',
 	  'issueTrackingSystem.issues.add',
 	  'issueTrackingSystem.issues.byId',
-	  'issueTrackingSystem.issues.edit'
+	  'issueTrackingSystem.issues.edit',
+	  'issueTrackingSystem.profile.password'
 	])
 	.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 		$routeProvider.otherwise({redirectTo: '/'});
@@ -43,6 +44,13 @@
 								}
 							} else if (rejection.data && rejection.data.ModelState && rejection.data.ModelState['']) {
 								errors = rejection.data.ModelState[''];
+								if(errors.length > 0) {
+									errors.forEach(function(err) {
+										toastr.error(err);										
+									})
+								}
+							} else if (rejection.data && rejection.data.ModelState && rejection.data.ModelState['model.NewPassword']) {
+								errors = rejection.data.ModelState['model.NewPassword'];
 								if(errors.length > 0) {
 									errors.forEach(function(err) {
 										toastr.error(err);										

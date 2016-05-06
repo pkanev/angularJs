@@ -37,10 +37,11 @@
 				authentication.registerUser(user)
 					.then(function(registeredUser) {
 						toastr.info('Successful registration');
-						$scope.currentUser = registeredUser;
-						$scope.isAuthenticated = identity.isAuthenticated();
-						$scope.isAdmin = identity.isAdmin();
-						$location.path('/fakepath');
+						var userToLogin = {
+							Username: user.email,
+							Password: user.password
+						};
+						$scope.login(userToLogin);
 					});
 				};
 

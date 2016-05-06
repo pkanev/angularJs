@@ -22,16 +22,8 @@
 						};
 
 					$http(req)
-						.then(function(response) {
-							//should automatically login user
-						var userToLogin = {
-							Username: user.email,
-							Password: user.password
-						};
-							identity.getToken(userToLogin)
-								.then(function(token) {
-									deferred.resolve(token);
-								})
+						.then(function(success) {
+							deferred.resolve(success);
 						});
 						
 					return deferred.promise;
