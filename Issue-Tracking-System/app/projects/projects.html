@@ -1,6 +1,11 @@
 <div class="row">
-	Criteria:
-	<input ng-model="filter" /> <a ng-click="reloadProjects()" class="btn btn-success btn-sm">Search!</a>
+	<div class="col-md-10">
+		<label for="filter">Advanced search</label>
+		<input id="filter" ng-model="filter" class="form-control"/>
+	</div>
+	<div class="col-md-2">
+		<a ng-click="reloadProjects()" class="btn btn-success btn-sm margin-top-2em">Search!</a>
+	</div>	 
 </div>
 <div class="row">
 <div ng-if="criteria=='none'">
