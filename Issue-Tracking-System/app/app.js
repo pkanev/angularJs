@@ -19,6 +19,7 @@
 	  'issueTrackingSystem.issues.add',
 	  'issueTrackingSystem.issues.byId',
 	  'issueTrackingSystem.issues.edit',
+	  'issueTrackingSystem.issues.comments.byIssue',
 	  'issueTrackingSystem.labels',
 	  'issueTrackingSystem.profile.password'
 	])

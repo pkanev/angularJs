@@ -19,6 +19,10 @@ body {
   margin-top: 2em;
 }
 
+.height-50 {
+  height: 50px;
+}
+
 .light-blue {
 	display: block;
 	height: 60px;

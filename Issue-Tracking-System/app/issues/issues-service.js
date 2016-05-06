@@ -71,13 +71,37 @@
                     return deferred.promise;
                 }
 
+                function getCommentsByIssueId(issueId) {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'issues/' + issueId + '/comments')
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
+                function postComment(comment, issueId) {
+                    var deferred = $q.defer();
+
+                    $http.post(BASE_URL + 'issues/' + issueId + '/comments', comment)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        });
+
+                    return deferred.promise;
+                }
+
             	return {
             		getIssuesByProject: getIssuesByProject,
                     getMyIssues: getMyIssues,
                     getIssueById: getIssueById,
                     addIssue: addIssue,
                     editIssue: editIssue,
-                    changeIssueStatus: changeIssueStatus
+                    changeIssueStatus: changeIssueStatus,
+                    getCommentsByIssueId: getCommentsByIssueId,
+                    postComment: postComment
             	}
             }
 		])
