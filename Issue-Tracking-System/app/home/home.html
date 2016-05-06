@@ -61,10 +61,10 @@
 <div ng-if="isAuthenticated" class="row">
   <h1>Dashboard</h1>
   <p>Welcome {{currentUser.Username}}</p>
-  <a ng-click="loadMyIssues()" class="btn btn-success btn-lg">My issues</a>
+  <a href="#/issues/me" class="btn btn-success btn-lg">My issues</a>
   <span ng-if="isAdmin" >
-    <a ng-click="loadProjects()" class="btn btn-success btn-lg">Projects</a>
-    <a ng-click="addProject()" class="btn btn-success btn-lg">Create a project!</a>
-    <a ng-click="addIssue()" class="btn btn-success btn-lg">Add issue!</a>
+    <a href="#/projects" class="btn btn-success btn-lg">Projects</a>
+    <a href="#/projects/add" class="btn btn-success btn-lg">Create a project!</a>
+    <a href="#/issues/add-issue" class="btn btn-success btn-lg">Add issue!</a>
   </span>
 </div>

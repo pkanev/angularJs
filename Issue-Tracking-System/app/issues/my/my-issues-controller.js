@@ -32,16 +32,6 @@
 		        };
 
 		        $scope.reloadIssues();
-
-		        $scope.loadIssueById = function(issueId) {
-		        	var path = '/issues/' + issueId;
-		        	$location.path(path);
-		        }
-
-		        $scope.loadProjectByIssue = function(projectId) {
-		        	var path = '/projects/' + projectId;
-		        	$location.path(path);
-		        }
 			}
 		]);
 })();

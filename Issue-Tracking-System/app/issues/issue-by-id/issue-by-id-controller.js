@@ -35,11 +35,6 @@
 							$scope.issue.AvailableStatuses = returnedStatuses;
 						})
 				}
-
-				$scope.loadEditIssue = function(issueId) {
-					var path = 'issues/' + issueId + '/edit/';
-					$location.path(path);
-				}
 			}
 		]);
 })();

@@ -44,22 +44,6 @@
 						$scope.login(userToLogin);
 					});
 				};
-
-				$scope.loadMyIssues = function() {
-					$location.path('/issues/me');
-				}
-
-				$scope.loadProjects = function() {
-					$location.path('/projects/');
-				}
-
-				$scope.addProject = function() {
-					$location.path('/projects/add');
-				}
-
-				$scope.addIssue = function() {
-					$location.path('/issues/add-issue');	
-				}
 			}
 		])
 	

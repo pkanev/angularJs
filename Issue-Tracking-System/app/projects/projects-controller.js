@@ -44,11 +44,6 @@
 		        };
 
 		        $scope.reloadProjects();
-
-		        $scope.loadProjectById = function(projectId){
-        			var path = '/projects/' + projectId;
-        			$location.path(path);
-		        };
 			}
 		]);
 })();

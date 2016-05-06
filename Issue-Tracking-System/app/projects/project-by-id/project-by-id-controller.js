@@ -51,16 +51,6 @@
 						$scope.loadPagination();						
 					});
 
-				$scope.loadEditProject = function(projectId) {
-					var path = '/projects/' + projectId + '/edit';
-					$location.path(path);
-				}
-
-				$scope.loadAddIssue = function(projectId) {
-					var path = 'projects/' + projectId + '/issues/add-issue';
-					$location.path(path);	
-				}
-
 				$scope.loadPagination = function() {
             		$scope.totalIssues = $scope.projectIssues.length;
                     var start = ($scope.issueParams['pageNumber']-1) * $scope.issueParams['pageSize'];
@@ -70,11 +60,6 @@
             		$scope.allIssues = $scope.projectIssues;
 		            
 		        };
-
-		        $scope.loadIssueById = function(issueId) {
-		        	var path = '/issues/' + issueId;
-					$location.path(path);
-		        }
 			}
 		])
 })();

@@ -4,8 +4,8 @@
 		<legend>
 			Project Key: {{project.ProjectKey}}
 			<br>
-			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-click="loadEditProject(project.Id)">Edit</button>
-			<button ng-if="isAdmin || isLead" class="btn btn-success" ng-click="loadAddIssue(project.Id)">Add issue</button>
+			<a ng-if="isAdmin || isLead" ng-href="#/projects/{{project.Id}}/edit" class="btn btn-success">Edit</a>
+			<a ng-if="isAdmin || isLead" ng-href="#/projects/{{project.Id}}/issues/add-issue" class="btn btn-success">Add issue</a>
 		</legend>
 		<fieldset>
 			<div class="form-group-sm">
@@ -30,12 +30,12 @@
 	</form>
 	<p>
 		<strong >Labels: </strong>
-		<span ng-repeat="label in project.Labels"><button class="btn btn-info btn-sm">{{label.Name}}</button> </span>
+		<span ng-repeat="label in project.Labels"><span class="label label-info">{{label.Name}}</span> </span>
 		<span ng-if="project.Labels.length == 0">No labels were found</span>
 	</p>
 	<p>
 		<strong >Priorities: </strong>
-		<span ng-repeat="priority in project.Priorities"><button class="btn btn-danger btn-sm">{{priority.Name}}</button> </span>
+		<span ng-repeat="priority in project.Priorities"><span class="label label-danger">{{priority.Name}}</span> </span>
 		<span ng-if="project.Priorities.length == 0">No priorities were found</span>
 	</p>
 </div>
@@ -52,7 +52,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="issue in issuesPerPage">
-				<td class="col-md-2"><a class="btn btn-link permalink-section" ng-click="loadIssueById(issue.Id)">{{issue.Title}}</a></td>
+				<td class="col-md-2"><a ng-href="#/issues/{{issue.Id}}" class="btn btn-link permalink-section">{{issue.Title}}</a></td>
 				<td class="col-md-5">{{issue.Description}}</td>
 				<td class="col-md-3">{{issue.DueDate}}</td>
 				<td class="col-md-2">{{issue.Assignee.Username}}</td>

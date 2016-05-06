@@ -4,7 +4,7 @@
 		<legend>
 			Issue Key: {{issue.IssueKey}}
 			<br>
-			<button ng-if="isLead || isAdmin" class="btn btn-success" ng-click="loadEditIssue(issue.Id)">Edit</button>
+			<a ng-if="isLead || isAdmin" ng-href="#/issues/{{issue.Id}}/edit/" class="btn btn-success">Edit</a>
 		</legend>
 		<fieldset>
 			<div class="form-group-sm">
@@ -44,7 +44,7 @@
 	<p>Status: {{issue.Status.Name}}</p>
 	<p>
 		<strong >Labels: </strong>
-		<span ng-repeat="label in issue.Labels"><button class="btn btn-info btn-sm">{{label.Name}}</button> </span>
+		<span ng-repeat="label in issue.Labels"><span class="label label-info">{{label.Name}}</span> </span>
 		<span ng-if="project.Labels.length == 0">No labels were found</span>
 	</p>
 </div>

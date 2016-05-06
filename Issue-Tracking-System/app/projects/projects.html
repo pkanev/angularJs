@@ -18,7 +18,7 @@
 				<td>{{project.ProjectKey}}</td>
 				<td>{{project.Name}}</td>
 				<td>{{project.Lead.Username}}</td>
-				<td><a ng-click="loadProjectById(project.Id)" class="btn btn-info">View</a></td>
+				<td><a ng-href="#/projects/{{project.Id}}" class="btn btn-info">View</a></td>
 			</tr>
 		</tbody>
 	</table>
