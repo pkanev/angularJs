@@ -61,10 +61,13 @@
 <div ng-if="isAuthenticated" class="row">
   <h1>Dashboard</h1>
   <p>Welcome {{currentUser.Username}}</p>
-  <a href="#/issues/me" class="btn btn-success btn-lg">My issues</a>
-  <span ng-if="isAdmin" >
+  <div class="margin-top-1em">
+    <a href="#/issues/me" class="btn btn-success btn-lg">My issues</a>
+    <a href="#/labels" class="btn btn-success btn-lg">Labels</a>    
+  </div>
+  <div ng-if="isAdmin" class="margin-top-1em">
     <a href="#/projects" class="btn btn-success btn-lg">Projects</a>
     <a href="#/projects/add" class="btn btn-success btn-lg">Create a project!</a>
     <a href="#/issues/add-issue" class="btn btn-success btn-lg">Add issue!</a>
-  </span>
+  </div>
 </div>

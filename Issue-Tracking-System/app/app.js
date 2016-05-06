@@ -19,6 +19,7 @@
 	  'issueTrackingSystem.issues.add',
 	  'issueTrackingSystem.issues.byId',
 	  'issueTrackingSystem.issues.edit',
+	  'issueTrackingSystem.labels',
 	  'issueTrackingSystem.profile.password'
 	])
 	.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {

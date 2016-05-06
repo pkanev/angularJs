@@ -21,5 +21,5 @@
                 changePassword: changePassword
                 }
             }
-	]);
+    	]);
 })();

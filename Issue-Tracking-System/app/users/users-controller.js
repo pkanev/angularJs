@@ -20,7 +20,6 @@
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,
 		        };
-				// $scope.filteredUsers = [];
 				$scope.users = [];
 
 				userServices.getAllUsers()
