@@ -131,15 +131,15 @@
 							deferredStatus.resolve({isAccessible: false});
 						}
 					} else if (condition.isAdmin){
-						if(isAdmin()) {
+						if(isAuthenticated() && isAdmin()) {
 							deferredStatus.resolve({isAccessible: true});
 						} else {
 							deferredStatus.resolve({isAccessible: false});
 						}
 					} else if (condition.isAdminOrLead) {
-						if(isAdmin()) {
+						if(isAuthenticated() && isAdmin()) {
 							deferredStatus.resolve({isAccessible: true});
-						} else {
+						} else if (isAuthenticated()){
 							isOwner($routeParams.id)
 								.then(function(isAllowed) {
 									if(isAllowed) {
@@ -148,6 +148,8 @@
 										deferredStatus.resolve({isAccessible: false});
 									} 
 								})
+						} else {
+							deferredStatus.resolve({isAccessible: false});
 						}
 					}
 

@@ -23,7 +23,8 @@
 			'$routeParams',
 			'labelsServices',
 			'PAGE_SIZE',
-			function($scope, $filter, $routeParams, labelsServices, PAGE_SIZE) {
+			'toastr',
+			function($scope, $filter, $routeParams, labelsServices, PAGE_SIZE, toastr) {
 				$scope.labelParams = {
 		        	'pageNumber' : 1,
 					'pageSize' : PAGE_SIZE,

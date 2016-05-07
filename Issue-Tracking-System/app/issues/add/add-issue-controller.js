@@ -6,7 +6,7 @@
 				templateUrl: 'app/issues/add/add-issue.html',
 				controller: 'AddIssueCtrl',
 				access: {
-					isAuthenticated: true
+					isAdmin: true
 				}
 			});
 			$routeProvider.when('/projects/:id/issues/add-issue', {

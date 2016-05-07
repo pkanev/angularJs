@@ -57,6 +57,15 @@
 										toastr.error(err);										
 									})
 								}
+							} else {
+								errors = rejection.data;
+								if(errors && errors.hasOwnProperty('length') && errors.length > 0) {
+									errors.forEach(function(err) {
+										toastr.error(err);
+									})
+								} else {
+									toastr.error('There was a problem loading the resource.');
+								}
 							}
 
 							return $q.reject(rejection);
