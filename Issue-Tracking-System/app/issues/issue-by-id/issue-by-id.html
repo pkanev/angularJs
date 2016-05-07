@@ -1,6 +1,6 @@
 <div class="row">
 	<h3>Issue</h3>
-	<form class="form-inline">
+	<form class="form">
 		<legend>
 			Issue Key: {{issue.IssueKey}}
 			<br>
@@ -8,33 +8,33 @@
 			<a ng-if="isLead || isAdmin" ng-href="#/issues/{{issue.Id}}/edit/" class="btn btn-success">Edit</a>
 		</legend>
 		<fieldset>
-			<div class="form-group-sm">
-				<label for="title" class="col-sm-7 control-label">Name</label>
-				<div class="col-sm-5">
+			<div class="form-group-sm col-sm-12">
+				<label for="title" class="col-sm-5 control-label">Name</label>
+				<div class="col-sm-7">
 					<input type="text" class="form-control" ng-model="issue.Title" id="title" disabled="disabled" />
 				</div>
 			</div>
-			<div class="form-group-sm">
-				<label for="description" class="col-sm-7 control-label">Description</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" ng-model="issue.Description" id="description" disabled="disabled"/>
+			<div class="form-group-sm col-sm-12">
+				<label for="description" class="col-sm-5 control-label">Description</label>
+				<div class="col-sm-7">
+					<textarea class="form-control" ng-model="issue.Description" id="description" disabled="disabled"></textarea>
 				</div>
 			</div>
-			<div class="form-group-sm">
-				<label for="assignee" class="col-sm-7 control-label">Assignee (current Id: {{issue.Assignee.Id}})</label>
-				<div class="col-sm-5">
+			<div class="form-group-sm col-sm-12">
+				<label for="assignee" class="col-sm-5 control-label">Assignee (current Id: {{issue.Assignee.Id}})</label>
+				<div class="col-sm-7">
 					<input type="text" class="form-control" ng-model="issue.Assignee.Username" id="assignee" disabled="disabled"/>
 				</div>
 			</div>
-			<div class="form-group-sm">
-				<label for="priorityId" class="col-sm-7 control-label">PriorityId (current Id: {{issue.Priority.Id}})</label>
-				<div class="col-sm-5">
+			<div class="form-group-sm col-sm-12">
+				<label for="priorityId" class="col-sm-5 control-label">PriorityId (current Id: {{issue.Priority.Id}})</label>
+				<div class="col-sm-7">
 					<input type="text" class="form-control" required="required" ng-model="issue.Priority.Name" id="priorityId" disabled="disabled"/>
 				</div>
 			</div>
-			<div class="form-group-sm">
-				<label for="dueDate" class="col-sm-7 control-label">Due Date</label>
-				<div class="col-sm-4">
+			<div class="form-group-sm col-sm-12">
+				<label for="dueDate" class="col-sm-5 control-label">Due Date</label>
+				<div class="col-sm-7">
 					<input type="text" class="form-control" required="required" ng-model="issue.DueDate" id="dueDate" disabled="disabled"/>
 				</div>
 			</div>

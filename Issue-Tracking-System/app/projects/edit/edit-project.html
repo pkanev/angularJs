@@ -1,6 +1,6 @@
 <div class="row">
 	<h3>Edit project</h3>
-	<form name="editProjectForm" class="form-inline">
+	<form name="editProjectForm" class="form">
 		<legend>
 			Project Key: {{project.ProjectKey}}
 			<br>
@@ -10,19 +10,19 @@
 		<fieldset class="col-sm-12">
 			<div class="form-group-sm">
 				<label for="name" class="col-sm-5 control-label">Name</label>
-				<div class="col-sm-4">
+				<div class="col-sm-7">
 					<input type="text" class="form-control" required="required" ng-model="project.Name" id="name" />
 				</div>
 			</div>
 			<div class="form-group-sm">
 				<label for="description" class="col-sm-5 control-label">Description</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" required="required" ng-model="project.Description" id="description" />
+				<div class="col-sm-7">
+					<textarea class="form-control" required="required" ng-model="project.Description" id="description"></textarea>
 				</div>
 			</div>
 			<div class="form-group-sm">
 				<label for="lead" class="col-sm-5 control-label">Lead (current Id: {{project.LeadId}})</label>
-				<div class="col-sm-4">
+				<div class="col-sm-7">
 					<select id="lead" class="form-control" ng-model="project.LeadId" ng-options="user.Id as user.Username for user in users | orderBy : 'Username'">
 					</select>
 				</div>

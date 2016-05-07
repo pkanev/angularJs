@@ -1,6 +1,6 @@
 <div class="row">
 	<h3>Add issue</h3>
-	<form name="addIssueForm" class="form-inline">
+	<form name="addIssueForm" class="form">
 		<legend>
 			<a ng-if="currentProject" ng-href="#projects/{{currentProject.Id}}" class="btn btn-primary">Cancel</a>
 			<a ng-if="!currentProject" ng-href="#/" class="btn btn-primary">Cancel</a>
@@ -16,7 +16,7 @@
 			<div class="form-group-sm col-sm-12">
 				<label for="description" class="col-sm-5 control-label">Description</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" required="required" ng-model="issue.Description" id="description" />
+					<textarea class="form-control" required="required" ng-model="issue.Description" id="description"></textarea>
 				</div>
 			</div>
 			<div class="form-group-sm col-sm-12">

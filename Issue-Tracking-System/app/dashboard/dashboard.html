@@ -74,7 +74,7 @@
 <div ng-if="isAuthenticated" class="row">
   <div class="col-md-4">
     <h3>Affiliated Projects</h3>
-    <div ng-repeat="project in affiliatedProjects">
+    <div ng-repeat="project in affiliatedProjects | orderBy:'Name'">
       <a ng-href="#/projects/{{project.Id}}" class="btn btn-link">{{project.Name}}</a>
     </div>
   </div>

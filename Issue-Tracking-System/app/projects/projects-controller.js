@@ -40,7 +40,6 @@
 		            	.then(function (projects) {
 		            		$scope.totalProjects = projects.TotalCount;
                             $scope.projectsPerPage = projects.Projects;
-                            console.log($scope.projectsPerPage);
 		            	})
 		        };
 
