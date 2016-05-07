@@ -15,7 +15,6 @@
 	  'issueTrackingSystem.projects',
 	  'issueTrackingSystem.projects.byId',
 	  'issueTrackingSystem.projects.edit',
-	  'issueTrackingSystem.issues.my',
 	  'issueTrackingSystem.issues.add',
 	  'issueTrackingSystem.issues.byId',
 	  'issueTrackingSystem.issues.edit',
