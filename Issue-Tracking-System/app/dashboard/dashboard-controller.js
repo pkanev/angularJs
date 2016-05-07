@@ -1,13 +1,13 @@
 (function () {
 	'use strict';
-	angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.authentication'])
+	angular.module('issueTrackingSystem.dashboard', ['issueTrackingSystem.users.authentication'])
 		.config(['$routeProvider', function($routeProvider) {
 			$routeProvider.when('/', {
-				templateUrl: 'app/home/home.html',
-				controller: 'HomeCtrl'
+				templateUrl: 'app/dashboard/dashboard.html',
+				controller: 'DashboardCtrl'
 			});
 		}])
-		.controller('HomeCtrl', [
+		.controller('DashboardCtrl', [
 			'$scope',
 			'$location',
 			'authentication',

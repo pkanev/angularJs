@@ -7,7 +7,7 @@
 	  'angular-loading-bar',
 	  'ui.bootstrap.pagination',
 	  'ipCookie',
-	  'issueTrackingSystem.home',
+	  'issueTrackingSystem.dashboard',
 	  'issueTrackingSystem.users.identity',
 	  'issueTrackingSystem.users',
 	  'issueTrackingSystem.common',
