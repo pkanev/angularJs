@@ -37,10 +37,10 @@
 						$scope.isAdmin = sessionStorage.hasAdminRights;
 
 						projectServices.getProjectById(currentIssue.Project.Id)
-								.then(function(returnedProject) {
-									$scope.currentProject = returnedProject;
-									$scope.issue.PriorityId = currentIssue.Priority.Id;
-								})
+							.then(function(returnedProject) {
+								$scope.currentProject = returnedProject;
+								$scope.issue.PriorityId = currentIssue.Priority.Id;
+							})
 					});
 
 				$scope.changeIssueStatus = function(issueId, newStatus) {

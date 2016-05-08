@@ -55,7 +55,6 @@
 	                            	})
                         })
 
-
 					});
 
 				$scope.postComment = function(comment) {
