@@ -2,16 +2,6 @@
 	'use strict';
 	angular.module('issueTrackingSystem.projects.byId', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.issues.issueServices'])
 		.config(['$routeProvider', function($routeProvider) {
-			// var routeChecks = {
-			// 	isAdmin: ['$q', 'identity', function($q, identity) {
-			// 		if(identity.isAdmin()) {
-			// 			return $q.when(true);
-			// 		} else {
-			// 			return $q.reject('Unauthorized');
-			// 		}
-			// 	}]
-			// };
-
 			$routeProvider.when('/projects/:id', {
 				templateUrl: 'app/projects/project-by-id/project-by-id.html',
 				controller: 'ProjectByIdCtrl',

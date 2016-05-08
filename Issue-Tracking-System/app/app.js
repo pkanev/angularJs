@@ -93,15 +93,6 @@
 						}
 					})
 			}
-
-			// if(identity.isAuthenticated()) {
-			// 	identity.getCurrentUser()
-			// 		.then(function(user) {
-			// 			$rootScope.currentUser = user;
-			// 			$rootScope.isAuthenticated = true;
-			// 			$rootScope.isAdmin = user.isAdmin;
-			// 	})
-			// }
 		});
 	}])
 	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')

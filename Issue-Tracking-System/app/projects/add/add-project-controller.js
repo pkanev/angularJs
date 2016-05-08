@@ -2,23 +2,12 @@
 	'use strict';
 	angular.module('issueTrackingSystem.projects.add', ['issueTrackingSystem.projects.projectServices', 'issueTrackingSystem.users.userServices'])
 		.config(['$routeProvider', function($routeProvider) {
-			// var routeChecks = {
-			// 	isAdmin: ['$q', 'identity', function($q, identity) {
-			// 		if(identity.isAdmin()) {
-			// 			return $q.when(true);
-			// 		} else {
-			// 			return $q.reject('Unauthorized');
-			// 		}
-			// 	}]
-			// };
-
 			$routeProvider.when('/projects/add', {
 				templateUrl: 'app/projects/add/add-project.html',
 				controller: 'CreateProjectCtrl',
 				access: {
 					isAdmin: true
 				}
-				//resolve: routeChecks.isAdmin
 			});
 		}])
 		.controller('CreateProjectCtrl', [

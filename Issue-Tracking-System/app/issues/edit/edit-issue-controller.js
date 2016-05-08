@@ -33,6 +33,7 @@
 						if(currentIssue.Author.Id === sessionStorage.id) {
 							$scope.isLead = true;
 						}
+						
 						$scope.isAdmin = sessionStorage.hasAdminRights;
 
 						projectServices.getProjectById(currentIssue.Project.Id)

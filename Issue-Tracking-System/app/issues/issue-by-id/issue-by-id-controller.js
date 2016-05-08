@@ -22,9 +22,11 @@
 						if(currentIssue.Author.Id === sessionStorage.id) {
 							$scope.isLead = true;
 						}
+
 						if(currentIssue.Assignee.Id === sessionStorage.id) {
 							$scope.isAssignee = true;
 						}
+						
 						$scope.isAdmin = sessionStorage.hasAdminRights;
 					})
 

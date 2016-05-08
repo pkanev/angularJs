@@ -62,7 +62,6 @@
                 return {
                     getAllProjects: getAllProjects,
                     getProjectById: getProjectById,
-                    // getIssuesByProject: getIssuesByProject,
                     editProject: editProject,
                     createProjectKey: createProjectKey,
                     createProject: createProject
