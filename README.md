@@ -1,5 +1,5 @@
-# angularJs
-# SoftUni Issue Tracking System
+# SoftUni JS Frameworks Final project
+## SoftUni Issue Tracking System
 
 This project is an application that was developed for the JavaScript Framework course 
 at the Software University (softuni.com).
